@@ -1,0 +1,83 @@
+import { Controller, Get, Query, Param, Body } from '@nestjs/common';
+import { Adabas, AdabasMap } from 'adabas-tcp';
+import { object } from '@hapi/joi';
+
+@Controller(':host/:port/read')
+export class ReadController {
+    @Get('fileid/:fileid')
+    async getAll(@Param('fileid') fileid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
+        try {
+            const ada = new Adabas(host, port);
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap
+                };
+            } else {
+                callData = {
+                    fnr: fileid
+                };
+            }
+            return ada.read(callData).then(res => {
+                // console.log(res);
+                ada.close().then(() => ada.disconnect());
+                return res;
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    @Get('fileid/:fileid/isn/:isnid')
+    async getbyISN(@Param('fileid') fileid, @Param('isnid') isnid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
+        try {
+            const ada = new Adabas(host, port);
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap, isn: isnid 
+                };
+            } else {
+                callData = {
+                    fnr: fileid, isn: isnid 
+                };
+            }
+            return ada.read(callData).then(res => {
+                // console.log(res);
+                ada.close().then(() => ada.disconnect());
+                return res;
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    @Get('fileid/:fileid/criteria')
+    async getbyCriteria(@Param('fileid') fileid, @Body() body, @Query() params,
+        @Param('host') host, @Param('port') port): Promise<any> {
+        try {
+            const ada = new Adabas(host, port);
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap, criteria: body.criteria
+                };
+            } else {
+                callData = {
+                    fnr: fileid, criteria: body.criteria
+                };
+            }
+            return ada.read(callData).then(res => {
+                // console.log(res);
+                ada.close().then(() => ada.disconnect());
+                return res;
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+}

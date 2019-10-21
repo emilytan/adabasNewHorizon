@@ -43,3 +43,39 @@
 <br>
 <div>Message: {{ hello$ | async | json }}</div>
 
+
+<button mdc-button raised>My Button</button>
+
+<button mdc-fab>
+  <mdc-icon>edit</mdc-icon>
+</button>
+
+<mdc-data-table (selectionChanged)="onSelectionChanged($event)"
+  (selectedAll)="onSelectedAll()" (unselectedAll)="onUnselectedAll()">
+  <table mdcDataTableTable>
+    <thead>
+      <tr mdcDataTableHeaderRow>
+        <th mdcDataTableHeaderCell>
+          <mdc-checkbox></mdc-checkbox>
+        </th>
+        <th mdcDataTableHeaderCell>Dessert</th>
+        <th mdcDataTableHeaderCell numeric>Calories</th>
+        <th mdcDataTableHeaderCell numeric>Carbs</th>
+        <th mdcDataTableHeaderCell numeric>Protein (g)</th>
+        <th mdcDataTableHeaderCell>Comments</th>
+      </tr>
+    </thead>
+    <tbody mdcDataTableContent>
+      <tr mdcDataTableRow *ngFor="let dessert of desserts" [selected]="dessert.checked">
+        <td mdcDataTableCell>
+          <mdc-checkbox [checked]="dessert.checked"></mdc-checkbox>
+        </td>
+        <td mdcDataTableCell>{{dessert.name}}</td>
+        <td mdcDataTableCell numeric>{{dessert.calories}}</td>
+        <td mdcDataTableCell numeric>{{dessert.carbs}}</td>
+        <td mdcDataTableCell numeric>{{dessert.protein}}</td>
+        <td mdcDataTableCell>{{dessert.comment}}</td>
+      </tr>
+    </tbody>
+  </table>
+</mdc-data-table>
