@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "adaNewHorizon", "camelCase"],
+    "component-selector": [true, "element", "ada-new-horizon", "kebab-case"]
+  }
+}

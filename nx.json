@@ -1,0 +1,24 @@
+{
+  "npmScope": "ada-new-horizon",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "adabas-new-horizon-e2e": {
+      "tags": []
+    },
+    "adabas-new-horizon": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "api-interfaces": {
+      "tags": []
+    }
+  }
+}
