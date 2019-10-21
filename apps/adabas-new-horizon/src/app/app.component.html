@@ -1,8 +1,45 @@
-<div style="text-align:center">
-  <h1>Welcome to adabas-new-horizon!</h1>
-  <img
-    width="450"
+<style>
+    .toolbar {
+    height: 60px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #Test-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .spacer1 {
+    flex: 0.5;
+  }
+</style>
+
+
+
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <img
+    width="50"
     src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
   />
+    <span>Adabas New Horizon</span>
+      <div class="spacer1"></div>
+      <a id="#About"> About Us </a>
+  </div>
+
+<div style="text-align:center">
+  <h1>Welcome to adabas-New-Horizon Project 2019!</h1>
 </div>
+<br>
 <div>Message: {{ hello$ | async | json }}</div>
+
