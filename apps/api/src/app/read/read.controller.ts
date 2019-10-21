@@ -7,12 +7,19 @@ export class ReadController {
     @Get('fileid/:fileid')
     async getAll(@Param('fileid') fileid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
-            // const Employee = new AdabasMap(11)
-            //     .alpha(8, 'AA', { name: 'Personnel ID' })
-            //     .alpha(3, 'AZ', { name: 'Language', occ: 3 });
-            // console.log(Employee);
             const ada = new Adabas(host, port);
-            return ada.read({ fnr: fileid, map: body.map || null }).then(res => {
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap
+                };
+            } else {
+                callData = {
+                    fnr: fileid
+                };
+            }
+            return ada.read(callData).then(res => {
                 // console.log(res);
                 ada.close().then(() => ada.disconnect());
                 return res;
@@ -26,7 +33,18 @@ export class ReadController {
     async getbyISN(@Param('fileid') fileid, @Param('isnid') isnid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
-            return ada.read({ fnr: fileid, map: body.map || null, isn: isnid }).then(res => {
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap, isn: isnid 
+                };
+            } else {
+                callData = {
+                    fnr: fileid, isn: isnid 
+                };
+            }
+            return ada.read(callData).then(res => {
                 // console.log(res);
                 ada.close().then(() => ada.disconnect());
                 return res;
@@ -41,7 +59,18 @@ export class ReadController {
         @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
-            return ada.read({ fnr: fileid, map: body.map || null, criteria: body.criteria }).then(res => {
+            let callData;
+            if (body.map) {
+                const adaMap = new AdabasMap(fileid);
+                callData = {
+                    map: adaMap, criteria: body.criteria
+                };
+            } else {
+                callData = {
+                    fnr: fileid, criteria: body.criteria
+                };
+            }
+            return ada.read(callData).then(res => {
                 // console.log(res);
                 ada.close().then(() => ada.disconnect());
                 return res;
