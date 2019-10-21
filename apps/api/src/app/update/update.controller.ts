@@ -1,5 +1,6 @@
 import { Controller, Param, Body, Put } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
+import { parseAdaMap } from '../functions/sharedfunction';
 
 @Controller(':host/:port/update')
 export class UpdateController {
@@ -11,7 +12,7 @@ export class UpdateController {
             // const test = { "AH": 999999 };
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap, object: body.object
                 };

@@ -1,5 +1,6 @@
 import { Controller, Delete, Param, Body } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
+import { parseAdaMap } from '../functions/sharedfunction';
 
 @Controller(':host/:port/delete')
 export class DeleteController {
@@ -10,7 +11,7 @@ export class DeleteController {
             const ada = new Adabas(host, port);
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap, criteria: body.criteria
                 };
