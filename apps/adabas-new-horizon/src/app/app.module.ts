@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MdcButtonModule,
   MdcFabModule,
   MdcIconModule,
   MDCDataTableModule,
-  MdcCheckboxModule
+  MdcCheckboxModule,
+  MdcFormFieldModule 
 } from '@angular-mdc/web';
 import { ClarityModule } from '@clr/angular';
 
@@ -40,7 +42,9 @@ const appRoutes: Routes = [
     MDCDataTableModule,
     MdcCheckboxModule,
     BrowserAnimationsModule,
-    ClarityModule
+    ClarityModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
