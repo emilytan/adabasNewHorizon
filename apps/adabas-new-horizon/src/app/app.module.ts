@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MdcButtonModule,
   MdcFabModule,
   MdcIconModule,
   MDCDataTableModule,
-  MdcCheckboxModule
+  MdcCheckboxModule,
+  MdcFormFieldModule 
 } from '@angular-mdc/web';
 
 const appRoutes: Routes = [
@@ -38,7 +40,10 @@ const appRoutes: Routes = [
     MdcIconModule,
     MDCDataTableModule,
     MdcCheckboxModule,
-    BrowserAnimationsModule
+    MdcFormFieldModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

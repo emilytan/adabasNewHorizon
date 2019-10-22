@@ -6,6 +6,7 @@ import { FileSelectionComponent } from './file-selection/file-selection.componen
 import { CriteriaComponent } from './criteria/criteria.component';
 import { QueryStatementComponent } from './query-statement/query-statement.component';
 import { ReadResultComponent } from './read-result/read-result.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // path = '/adabas-query'
 const childRoutes: Routes = [
@@ -20,11 +21,13 @@ const childRoutes: Routes = [
     FileSelectionComponent,
     CriteriaComponent,
     QueryStatementComponent,
-    ReadResultComponent
+    ReadResultComponent,
   ],
   imports: [
     RouterModule.forChild(childRoutes),
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdabasQueryModule { }
