@@ -1,3 +1,4 @@
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -8,23 +9,38 @@ import {
   MdcFabModule,
   MdcIconModule,
   MDCDataTableModule,
-  MdcCheckboxModule 
+  MdcCheckboxModule
 } from '@angular-mdc/web';
 
+const appRoutes: Routes = [
+  // path = '/adabas-query'
+  {
+    path: 'adabas-query',
+    loadChildren: () =>
+      import('./adabas-query/adabas-query.module').then(
+        m => m.AdabasQueryModule
+      )
+  },
+  // path = '/'
+  { path: '', redirectTo: '/adabas-query', pathMatch: 'full' }
+];
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
     MdcButtonModule,
     MdcFabModule,
     MdcIconModule,
-    MDCDataTableModule, 
+    MDCDataTableModule,
     MdcCheckboxModule,
     BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
-
+export class AppModule {}
