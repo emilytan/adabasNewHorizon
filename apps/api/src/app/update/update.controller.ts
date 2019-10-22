@@ -14,11 +14,11 @@ export class UpdateController {
             if (body.map) {
                 const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
-                    map: adaMap, object: body.object
+                    map: adaMap, criteria: body.criteria, object: body.object,
                 };
             } else {
                 callData = {
-                    fnr: fileid, object: body.object
+                    fnr: fileid, criteria: body.criteria, object: body.object
                 };
             }
             return ada.update(callData).then(res => {
