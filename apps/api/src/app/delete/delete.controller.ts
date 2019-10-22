@@ -1,4 +1,4 @@
-import { Controller, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Delete, Param, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
 import { parseAdaMap } from '../functions/sharedfunction';
 
@@ -27,7 +27,7 @@ export class DeleteController {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

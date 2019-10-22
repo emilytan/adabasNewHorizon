@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Param, Body } from '@nestjs/common';
+import { Controller, Get, Query, Param, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
 import { parseAdaMap } from '../functions/sharedfunction';
 
@@ -26,7 +26,7 @@ export class ReadController {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @Get('fileid/:fileid/isn/:isnid')
@@ -51,7 +51,7 @@ export class ReadController {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @Get('fileid/:fileid/criteria')
@@ -77,7 +77,7 @@ export class ReadController {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
