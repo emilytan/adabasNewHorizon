@@ -7,7 +7,6 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  ada = new Adabas('daeirnd30826', 60001);
 
   constructor(private readonly appService: AppService) {}
 
@@ -16,9 +15,4 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Get('readAda')
-  async readAda() {
-    const fileData = await this.ada.read({ fnr: 11 });
-    return fileData;
-  }
 }
