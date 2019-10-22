@@ -1,5 +1,6 @@
 import { Controller, Post, Param, Body } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
+import { parseAdaMap } from '../functions/sharedfunction';
 
 @Controller(':host/:port/create')
 export class CreateController {
@@ -12,7 +13,7 @@ export class CreateController {
             // const test = { "AA": "99999999", "AB": { "AC": "TestUser", "AE": "HI", "AD": "" }, "AF": "M", "AG": "M", "AH": 999999, "A1": { "AI": ["3 RUE DE GRANBY"], "AJ": "ST-ETIENNE", "AK": "42100", "AL": "F" }, "A2": { "AN": "9999", "AM": "42452720" }, "AO": "VENT56", "AP": "CHEF DE SERVICE", "AQ": [{ "AR": "EUR", "AS": 9999, "AT": [29] }], "A3": { "AU": 19, "AV": 5 }, "AW": [{ "AX": 19990701, "AY": 19990731 }], "AZ": ["FRE", "ENG"] };
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap, object: body.object
                 };

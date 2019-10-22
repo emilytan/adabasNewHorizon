@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Param, Body } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
-import { object } from '@hapi/joi';
+import { parseAdaMap } from '../functions/sharedfunction';
 
 @Controller(':host/:port/read')
 export class ReadController {
@@ -10,7 +10,7 @@ export class ReadController {
             const ada = new Adabas(host, port);
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap
                 };
@@ -35,7 +35,7 @@ export class ReadController {
             const ada = new Adabas(host, port);
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap, isn: isnid 
                 };
@@ -61,7 +61,7 @@ export class ReadController {
             const ada = new Adabas(host, port);
             let callData;
             if (body.map) {
-                const adaMap = new AdabasMap(fileid);
+                const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
                     map: adaMap, criteria: body.criteria
                 };
