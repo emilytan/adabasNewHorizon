@@ -1,83 +1,15 @@
-<style>
-    .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #Test-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .spacer1 {
-    flex: 0.5;
-  }
-</style>
-
-
-
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-    <img
-    width="50"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
-    <span>Adabas New Horizon</span>
-      <div class="spacer1"></div>
-      <a id="#About"> About Us </a>
-  </div>
-
-<div style="text-align:center">
-  <h1>Welcome to adabas-New-Horizon Project 2019!</h1>
-</div>
-<br>
-<div>Message: {{ hello$ | async | json }}</div>
-
-
-<button mdc-button raised>My Button</button>
-
-<button mdc-fab>
-  <mdc-icon>edit</mdc-icon>
-</button>
-
-<mdc-data-table (selectionChanged)="onSelectionChanged($event)"
-  (selectedAll)="onSelectedAll()" (unselectedAll)="onUnselectedAll()">
-  <table mdcDataTableTable>
-    <thead>
-      <tr mdcDataTableHeaderRow>
-        <th mdcDataTableHeaderCell>
-          <mdc-checkbox></mdc-checkbox>
-        </th>
-        <th mdcDataTableHeaderCell>Dessert</th>
-        <th mdcDataTableHeaderCell numeric>Calories</th>
-        <th mdcDataTableHeaderCell numeric>Carbs</th>
-        <th mdcDataTableHeaderCell numeric>Protein (g)</th>
-        <th mdcDataTableHeaderCell>Comments</th>
-      </tr>
-    </thead>
-    <tbody mdcDataTableContent>
-      <tr mdcDataTableRow *ngFor="let dessert of desserts" [selected]="dessert.checked">
-        <td mdcDataTableCell>
-          <mdc-checkbox [checked]="dessert.checked"></mdc-checkbox>
-        </td>
-        <td mdcDataTableCell>{{dessert.name}}</td>
-        <td mdcDataTableCell numeric>{{dessert.calories}}</td>
-        <td mdcDataTableCell numeric>{{dessert.carbs}}</td>
-        <td mdcDataTableCell numeric>{{dessert.protein}}</td>
-        <td mdcDataTableCell>{{dessert.comment}}</td>
-      </tr>
-    </tbody>
-  </table>
-</mdc-data-table>
-
+<header class="header-6">
+    <div class="branding">
+        ...
+    </div>
+    <div class="header-nav">
+        <a href="javascript://" class="active nav-link nav-text">Dashboard</a>
+        <a href="javascript://" class="nav-link nav-text">Interactive Analytics</a>
+    </div>
+    <div class="header-actions">
+        <a href="javascript://" class="nav-link nav-icon" aria-label="settings">
+            <clr-icon shape="cog"></clr-icon>
+        </a>
+    </div>
+</header>
 <router-outlet></router-outlet>

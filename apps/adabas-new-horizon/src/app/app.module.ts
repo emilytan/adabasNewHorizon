@@ -13,6 +13,7 @@ import {
   MdcCheckboxModule,
   MdcFormFieldModule 
 } from '@angular-mdc/web';
+import { ClarityModule } from '@clr/angular';
 
 const appRoutes: Routes = [
   // path = '/adabas-query'
@@ -40,8 +41,8 @@ const appRoutes: Routes = [
     MdcIconModule,
     MDCDataTableModule,
     MdcCheckboxModule,
-    MdcFormFieldModule,
     BrowserAnimationsModule,
+    ClarityModule,
     ReactiveFormsModule,
     FormsModule
   ],
