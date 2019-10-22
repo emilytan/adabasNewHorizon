@@ -11,7 +11,6 @@ import {
   MdcIconModule,
   MDCDataTableModule,
   MdcCheckboxModule,
-  MdcFormFieldModule 
 } from '@angular-mdc/web';
 import { ClarityModule } from '@clr/angular';
 

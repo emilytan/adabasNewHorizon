@@ -10,9 +10,27 @@ export class FileSelectionComponent implements OnInit {
 
   fileSelectForm: FormGroup;
 
+  function: any = [
+    {id: 0, name: "Read"},
+    {id: 1, name: "Delete"},
+    {id: 2, name: "Update"},
+    {id: 3, name: "Delete"},
+  ];
+
+  selectedFunction: any;
+
   constructor() { }
 
   ngOnInit() {
+    this.selectedFunction = this.function[0];
+  }
+
+  fileSelect(fileSelectForm: any) { 
+
+  }
+
+  onChange($event) {
+
   }
 
 }
