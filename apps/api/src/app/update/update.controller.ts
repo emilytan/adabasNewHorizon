@@ -1,4 +1,4 @@
-import { Controller, Param, Body, Put } from '@nestjs/common';
+import { Controller, Param, Body, Put, HttpException, HttpStatus } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
 import { parseAdaMap } from '../functions/sharedfunction';
 
@@ -28,7 +28,7 @@ export class UpdateController {
             });
         } catch (error) {
             console.log(error);
-            throw error;
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
