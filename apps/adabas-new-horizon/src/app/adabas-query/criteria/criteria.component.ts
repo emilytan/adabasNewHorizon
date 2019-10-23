@@ -10,11 +10,15 @@ import { AdabasService } from '../adabas.service';
 })
 export class CriteriaComponent implements OnInit {
 
+   browseList: string[];
+
   constructor(private adabasSvc: AdabasService) { }
 
   ngOnInit() {
     this.getBrowseFile().subscribe( response => {
-      console.log('response', response);
+      this.browseList = response;
+      console.log('this.browseList', this.browseList);
+
     });
   }
 
