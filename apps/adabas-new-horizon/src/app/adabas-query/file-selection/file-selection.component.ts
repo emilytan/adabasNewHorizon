@@ -31,8 +31,13 @@ export class FileSelectionComponent implements OnInit {
   }
 
   fileSelect(fileSelectForm: any) { 
+    const theparam = new Array<{ Parameter: string }>();
+    theparam.push(
+      { Parameter: fileSelectForm.host }, 
+      { Parameter: fileSelectForm.port }, 
+      { Parameter: fileSelectForm.fnr  });
 
-    
+      console.log('here' , theparam)
   }
 
   onChange($event) {
