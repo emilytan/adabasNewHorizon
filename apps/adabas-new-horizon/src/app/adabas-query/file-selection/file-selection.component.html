@@ -71,22 +71,42 @@
                   <div class="clr-select-wrapper">
                     <select
                       name="function"
-                      [(ngModel)]="selectedFunction"
                       formControlName="ddlFunction"
-                      (change)="onChange($event)"
                       class="clr-select"
                     >
-                      <option *ngFor="let func of function" [ngValue]="func">{{
-                        func.name
-                      }}</option>
+                      <option
+                        *ngFor="let func of function"
+                        [ngValue]="func.name"
+                        >{{ func.name }}</option
+                      >
                     </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="clr-form-control clr-row">
-              <div class="clr-col-12">
-                <button type="submit" class="btn btn-primary">Select</button>
+              <div class="clr-col-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="fileSelected"
+                >
+                  Select
+                </button>
+              </div>
+              <div class="clr-col-10">
+                <ng-container *ngIf="fileSelected">
+                  <span class="label label-info"
+                    >Selected: {{ selectedChoice.host }}:{{
+                      selectedChoice.port
+                    }}({{ selectedChoice.fnr }}) [{{
+                      selectedChoice.ddlFunction
+                    }}]</span
+                  >
+                  <button type="button" class="btn btn-icon" (click)="editSelection()" aria-label="home">
+                    <clr-icon shape="pencil" class="is-solid"></clr-icon>
+                  </button>
+                </ng-container>
               </div>
             </div>
           </form>
