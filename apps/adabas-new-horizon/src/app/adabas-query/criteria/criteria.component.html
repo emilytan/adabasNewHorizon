@@ -2,7 +2,7 @@
   <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
     <div class="card">
       <div class="card-header">
-        Criteria
+        READ Criteria
       </div>
       <div class="card-block">
         <div class="card-text">
@@ -68,21 +68,22 @@
                   >Adabas Map</label
                 >
               </div>
-              <div class="clr-control-container clr-col-12 clr-col-md-10">
+              <div class="clr-control-container clr-col-12 clr-col-md-2">
                 <div class="clr-input-wrapper">
-                  <clr-dropdown [clrCloseMenuOnItemClick]="false">
-                    <button clrDropdownTrigger>
-                      None
-                      <clr-icon shape="caret down"></clr-icon>
-                    </button>
-                    <clr-dropdown-menu *clrIfOpen>
-                      <div clrDropdownItem>Action 1</div>
-                      <div clrDropdownItem>Action 2</div>
-                      <div clrDropdownItem>Link 1</div>
-                      <div clrDropdownItem>Link 2</div>
-                    </clr-dropdown-menu>
-                  </clr-dropdown>
+                  <div class="clr-select-wrapper">
+                    <select id="select-basic" class="clr-select">
+                      <option value="1none">None</option>
+                      <option *ngFor="let list of browseList" value="list">{{
+                        list
+                      }}</option>
+                    </select>
+                  </div>
                 </div>
+              </div>
+              <div class="clr-control-container clr-col-12 clr-col-md-2">
+                <button class="btn btn-link" (click)="readFile()">
+                  File Content
+                </button>
               </div>
             </div>
           </form>
