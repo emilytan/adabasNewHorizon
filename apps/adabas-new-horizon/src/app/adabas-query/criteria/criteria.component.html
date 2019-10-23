@@ -1,6 +1,3 @@
-<!-- <h2>Criteria</h2> -->
-
-
 <div class="clr-row">
     <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
         <div class="card">
@@ -28,7 +25,7 @@
                             <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                                 <input type="checkbox" id="vertical-checkbox2" name="checkbox-full" value="filter"
                                     class="clr-checkbox">
-                                <label for="vertical-checkbox2" class="clr-control-label ">Filter</label>
+                                <label for="vertical-checkbox2" class="clr-control-label">Filter</label>
                             </div>
                             <div class="clr-control-container clr-col-12 clr-col-md-10">
                                 <div class="clr-input-wrapper">
@@ -45,8 +42,20 @@
                             </div>
                             <div class="clr-control-container clr-col-12 clr-col-md-10">
                                 <div class="clr-input-wrapper">
-                                    <textarea id="vertical-checkbox3" placeholder="adabas map data"
-                                        class="clr-textarea"></textarea>
+
+                                    <clr-dropdown [clrCloseMenuOnItemClick]="false">
+                                        <button clrDropdownTrigger>
+                                            None
+                                            <clr-icon shape="caret down"></clr-icon>
+                                        </button>
+                                        <clr-dropdown-menu *clrIfOpen>
+                                            <div clrDropdownItem>Action 1</div>
+                                            <div clrDropdownItem>Action 2</div>
+                                            <div clrDropdownItem>Link 1</div>
+                                            <div clrDropdownItem>Link 2</div>
+                                        </clr-dropdown-menu>
+                                    </clr-dropdown>
+
                                 </div>
                             </div>
                         </div>
