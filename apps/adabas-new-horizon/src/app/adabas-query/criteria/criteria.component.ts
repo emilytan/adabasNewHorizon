@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, map,  } from 'rxjs/operators';
+import { catchError, map, } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -10,12 +11,17 @@ import { AdabasService } from '../adabas.service';
 })
 export class CriteriaComponent implements OnInit {
 
-   browseList: string[];
+  browseList: string[];
+  criteriaForm = new FormGroup({
+    isn: new FormControl('', null),
+    filter: new FormControl('', null),
+    adabasMap: new FormControl('', null),
+  });
 
   constructor(private adabasSvc: AdabasService) { }
 
   ngOnInit() {
-    this.getBrowseFile().subscribe( response => {
+    this.getBrowseFile().subscribe(response => {
       this.browseList = response;
       console.log('this.browseList', this.browseList);
 
@@ -32,6 +38,22 @@ export class CriteriaComponent implements OnInit {
         return err;
       })
     );
+  }
+
+  readFile(criteriaForm) {
+    console.log('criteriaForm', criteriaForm);
+    const file = '{"file":"' + criteriaForm.adabasMap + '"}';
+    console.log('file:', file);
+    return this.adabasSvc.getRest('fileio/readfile').pipe(
+      map(jsonResponse => {
+        console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError((err) => {
+        return err;
+      })
+    );
+
   }
 
 }
