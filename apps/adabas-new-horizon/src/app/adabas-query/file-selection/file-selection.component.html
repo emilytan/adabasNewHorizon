@@ -74,11 +74,8 @@
                       [(ngModel)]="selectedFunction"
                       formControlName="ddlFunction"
                       (change)="onChange($event)"
-                      class="clr-select"
-                    >
-                      <option *ngFor="let func of function" [ngValue]="func">{{
-                        func.name
-                      }}</option>
+                      class="clr-select">
+                      <option *ngFor="let func of function" [ngValue]="func">{{ func.name }}</option>
                     </select>
                   </div>
                 </div>
