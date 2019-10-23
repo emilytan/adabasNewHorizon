@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./file-selection.component.scss']
 })
 export class FileSelectionComponent implements OnInit {
+
+  @Output('formSelect') formSelect = new EventEmitter();
 
   fileSelectForm: FormGroup;
   function: any = [
@@ -31,17 +33,11 @@ export class FileSelectionComponent implements OnInit {
   }
 
   fileSelect(fileSelectForm: any) { 
-    const theparam = new Array<{ Parameter: string }>();
-    theparam.push(
-      { Parameter: fileSelectForm.host }, 
-      { Parameter: fileSelectForm.port }, 
-      { Parameter: fileSelectForm.fnr  });
-
-      console.log('here' , theparam)
+    this.formSelect.emit(fileSelectForm);
   }
 
   onChange($event) {
-
+    this.selectedFunction = this.function($event);
   }
 
 }

@@ -63,6 +63,7 @@
                   [(ngModel)]="selectedFunction"
                   formControlName="ddlFunction"
                   (change)="onChange($event)"
+                  class="clr-input"
                 >
                   <option *ngFor="let func of function" [ngValue]="func">{{
                     func.name
