@@ -7,22 +7,44 @@ import { sampleResult } from './sample-result';
   styleUrls: ['./read-result.component.scss']
 })
 export class ReadResultComponent implements OnInit {
-  keys;
-  result = sampleResult;
+  allData = { data: sampleResult, keys: [] }
+  displayData = new Array();
+  pageSize = 10;
+  pagination;
+  paginationEnabled = true;
   constructor() {}
 
   ngOnInit() {
-    console.log(this.result);
-    console.log('keys', Object.keys(this.result[0]));
+    console.log(this.allData);
+    console.log('keys', Object.keys(this.allData.data[0]));
+    this.sanatizeData();
+    this.populateDisplay(0, 19);
+  }
 
-    if (this.result.length) {
-      this.keys = Object.keys(this.result[0]);
-      this.result.forEach((row) => {
-        this.keys.forEach(element => {
-          if (Array.isArray(row[element]) || (row[element] !== null && typeof (row[element]) === 'object')) {
+  refresh(event) {
+    const page = event['page'];
+    console.log('page properties', page);
+    this.populateDisplay(page['from'], page['to']);
+  }
+
+  populateDisplay(from: number, to: number) {
+    this.displayData = new Array();
+    for(let i = from; i <= to; i++) {
+      this.displayData.push(this.allData.data[i]);
+    }
+  }
+
+  sanatizeData() {
+    if (this.allData.data.length) {
+      this.allData.keys = Object.keys(this.allData.data[0]);
+      this.allData.data.forEach(row => {
+        this.allData.keys.forEach(element => {
+          if (
+            Array.isArray(row[element]) ||
+            (row[element] !== null && typeof row[element] === 'object')
+          ) {
             row[element] = JSON.stringify(row[element]);
           }
-          
         });
       });
     }
