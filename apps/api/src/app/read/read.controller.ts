@@ -37,11 +37,11 @@ export class ReadController {
             if (body.map) {
                 const adaMap = parseAdaMap(body.map, fileid);
                 callData = {
-                    map: adaMap, isn: isnid 
+                    map: adaMap, isn: isnid
                 };
             } else {
                 callData = {
-                    fnr: fileid, isn: isnid 
+                    fnr: fileid, isn: isnid
                 };
             }
             return ada.read(callData).then(res => {
@@ -55,8 +55,7 @@ export class ReadController {
         }
     }
     @Get('fileid/:fileid/criteria')
-    async getbyCriteria(@Param('fileid') fileid, @Body() body, @Query() params,
-        @Param('host') host, @Param('port') port): Promise<any> {
+    async getbyCriteria(@Param('fileid') fileid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
             let callData;
