@@ -1,0 +1,15 @@
+<h2>Query Result</h2>
+<clr-datagrid>
+  <ng-container *ngFor="let key of keys">
+    <clr-dg-column>{{ key }}</clr-dg-column>
+  </ng-container>
+  <ng-container *ngFor="let row of result">
+    <clr-dg-row>
+      <ng-container *ngFor="let key of keys">
+        <clr-dg-cell>{{ row[key] }}</clr-dg-cell>
+      </ng-container>
+    </clr-dg-row>
+  </ng-container>
+
+  <clr-dg-footer>{{ result.length }} rows</clr-dg-footer>
+</clr-datagrid>

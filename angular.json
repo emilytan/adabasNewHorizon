@@ -25,8 +25,15 @@
               "apps/adabas-new-horizon/src/favicon.ico",
               "apps/adabas-new-horizon/src/assets"
             ],
-            "styles": ["apps/adabas-new-horizon/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@clr/ui/clr-ui.min.css",
+              "apps/adabas-new-horizon/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+              "node_modules/@clr/icons/clr-icons.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,7 +92,10 @@
               "apps/adabas-new-horizon/tsconfig.app.json",
               "apps/adabas-new-horizon/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/adabas-new-horizon/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/adabas-new-horizon/**"
+            ]
           }
         },
         "test": {
@@ -119,8 +129,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/adabas-new-horizon-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/adabas-new-horizon-e2e/**"]
+            "tsConfig": [
+              "apps/adabas-new-horizon-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/adabas-new-horizon-e2e/**"
+            ]
           }
         }
       }
@@ -138,7 +153,9 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -167,7 +184,10 @@
               "apps/api/tsconfig.app.json",
               "apps/api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/api/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/api/**"
+            ]
           }
         },
         "test": {
@@ -192,7 +212,10 @@
               "libs/api-interfaces/tsconfig.lib.json",
               "libs/api-interfaces/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/api-interfaces/**"
+            ]
           }
         },
         "test": {
