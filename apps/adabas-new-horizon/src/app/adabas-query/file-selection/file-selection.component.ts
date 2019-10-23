@@ -13,7 +13,7 @@ export class FileSelectionComponent implements OnInit {
     { id: 0, name: "Read" },
     { id: 1, name: "Delete" },
     { id: 2, name: "Update" },
-    { id: 3, name: "Delete" }
+    { id: 3, name: "Create" }
   ];
   selectedFunction: any;
 
@@ -32,6 +32,7 @@ export class FileSelectionComponent implements OnInit {
 
   fileSelect(fileSelectForm: any) { 
 
+    
   }
 
   onChange($event) {
