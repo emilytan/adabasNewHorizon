@@ -7,6 +7,7 @@ import { CriteriaComponent } from './criteria/criteria.component';
 import { QueryStatementComponent } from './query-statement/query-statement.component';
 import { ReadResultComponent } from './read-result/read-result.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClarityModule } from '@clr/angular';
 
 // path = '/adabas-query'
 const childRoutes: Routes = [
@@ -27,7 +28,8 @@ const childRoutes: Routes = [
     RouterModule.forChild(childRoutes),
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClarityModule
   ]
 })
 export class AdabasQueryModule { }
