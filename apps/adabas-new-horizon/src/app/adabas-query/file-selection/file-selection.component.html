@@ -1,31 +1,39 @@
 <h2>File Selection</h2>
 <br>
-<br>
-<form [formGroup]="fileSelectForm" (ngSubmit)="fileSelect(fileSelectForm.value)">
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Host</label>
-        <div class="col-sm-6">
-            <input type="text" formControlName="host" maxlength="5" name="host" id="host">
-        </div>       
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Port</label>
-        <div class="col-sm-6">
-            <input type="text" formControlName="port" name="port" id="port">
-        </div>  
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">File Number</label>
-            <div class="col-sm-6">
-                <input type="text" formControlName="fnr" name="fnr" id="fnr">
-            </div>  
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Function</label>
-        <select [(ngModel)]="selectedFunction" formControlName="ddlFunction" (change)="onChange($event)">
-            <option *ngFor="let func of function" [ngValue]="func">{{func.name}}</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Select</button>
-</form>
+<div class="clr-row">
+        <div class="clr-col-lg-4 clr-col-12">
+            <div class="card-block">
+                    <form clrForm clrLayout="horizontal" [formGroup]="fileSelectForm" (ngSubmit)="fileSelect(fileSelectForm.value)">
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label">Host</label>
+                                <div class="col-sm-6">
+                                    <input type="text" formControlName="host" maxlength="5" name="host" id="host">
+                                </div>       
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Port</label>
+                                <div class="col-sm-6">
+                                    <input type="text" formControlName="port" name="port" id="port">
+                                </div>  
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">File Number</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" formControlName="fnr" name="fnr" id="fnr">
+                                    </div>  
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Function</label>
+                                <select [(ngModel)]="selectedFunction" formControlName="ddlFunction" (change)="onChange($event)">
+                                    <option *ngFor="let func of function" [ngValue]="func">{{func.name}}</option>
+                                </select>
+                            </div>
+                        </form>
+            </div>
+               <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Select</button>
+                </div>
+        </div> 
+</div>
+
 
