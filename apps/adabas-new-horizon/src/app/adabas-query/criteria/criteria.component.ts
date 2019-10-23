@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, map,  } from 'rxjs/operators';
+import { AdabasService } from '../adabas.service';
+
 
 @Component({
   selector: 'ada-new-horizon-criteria',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CriteriaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adabasSvc: AdabasService) { }
 
   ngOnInit() {
+    this.getBrowseFile().subscribe( response => {
+      console.log('response', response);
+    });
+  }
+
+  getBrowseFile() {
+    return this.adabasSvc.getRest('fileio/browsefile').pipe(
+      map(jsonResponse => {
+        console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError((err) => {
+        return err;
+      })
+    );
   }
 
 }
