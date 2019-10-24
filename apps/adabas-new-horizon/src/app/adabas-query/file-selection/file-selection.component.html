@@ -36,7 +36,7 @@
                 <div class="clr-input-wrapper">
                   <input
                     type="text"
-                    id="host"
+                    id="port"
                     formControlName="port"
                     placeholder="Port"
                     class="clr-input"
@@ -54,7 +54,7 @@
                 <div class="clr-input-wrapper">
                   <input
                     type="text"
-                    id="host"
+                    id="fnr"
                     formControlName="fnr"
                     placeholder="File Number"
                     class="clr-input"
@@ -96,14 +96,22 @@
               </div>
               <div class="clr-col-10">
                 <ng-container *ngIf="fileSelected">
+                  Selected:
                   <span class="label label-info"
-                    >Selected: {{ selectedChoice.host }}:{{
-                      selectedChoice.port
-                    }}({{ selectedChoice.fnr }}) [{{
-                      selectedChoice.ddlFunction
-                    }}]</span
+                    >{{ selectedChoice.host }}:{{ selectedChoice.port }}
+                  </span>
+                  <span class="label label-info">
+                    File: {{ selectedChoice.fnr }}
+                  </span>
+                  <span class="label label-info">
+                    {{ selectedChoice.ddlFunction }}</span
                   >
-                  <button type="button" class="btn btn-icon" (click)="editSelection()" aria-label="home">
+                  <button
+                    type="button"
+                    class="btn btn-link btn-icon"
+                    (click)="editSelection()"
+                    aria-label="home"
+                  >
                     <clr-icon shape="pencil" class="is-solid"></clr-icon>
                   </button>
                 </ng-container>
