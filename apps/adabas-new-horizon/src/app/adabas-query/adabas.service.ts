@@ -7,19 +7,107 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AdabasService {
+  constructor(private httpreq: HttpClient) {}
 
-  constructor(private httpreq: HttpClient) { }
-
-  
   getRest(resturl: string): any {
-    const url =  'http://localhost:3333/api/' + resturl;
+    const url = 'http://localhost:3333/api/' + resturl;
     console.log('url', url);
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.httpreq.get(url, httpOptions).pipe(
-      timeoutWith(180000, throwError(new Error('Server request timeout: ' + resturl))),
-      catchError((e) => {
+      timeoutWith(
+        180000,
+        throwError(new Error('Server request timeout: ' + resturl))
+      ),
+      catchError(e => {
         console.log('e', e);
         return throwError(e);
+      })
+    );
+  }
+
+  postRest(resturl: string, data: any): any {
+    const url = 'http://localhost:3333/api/' + resturl;
+    console.log('url', url);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.httpreq.post(url, data, httpOptions).pipe(
+      timeoutWith(
+        180000,
+        throwError(new Error('Server request timeout: ' + resturl))
+      ),
+      catchError(e => {
+        console.log('e', e);
+        return throwError(e);
+      })
+    );
+  }
+
+  getBrowseFileService() {
+    return this.getRest('fileio/browsefile').pipe(
+      map(jsonResponse => {
+        // console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
+
+  readFileService(fileName) {
+    const postBody = JSON.stringify({ file: fileName });
+    return this.postRest('fileio/readfile', postBody.toString()).pipe(
+      map(jsonResponse => {
+        // console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
+
+  readFDT(host: string, port: number, fileId: number) {
+    const url = host + '/' + port + '/fdt/fileid/' + fileId;
+    return this.getRest(url).pipe(
+      map(jsonResponse => {
+        // console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
+
+  writeFileService(fileName: string, fileContent: string) {
+    const postBody = JSON.stringify({ file: fileName, content: fileContent});
+    // console.log('write body data :', postBody);
+
+    return this.postRest('fileio/writefile', postBody).pipe(
+      map(jsonResponse => {
+        // console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
+
+  sql(host: string, port: number, sqlstring: string) {
+    const url = host + '/' + port + '/sql';
+    const postBody = JSON.stringify({ sql: sqlstring });
+    return this.postRest(url, postBody).pipe(
+      map(jsonResponse => {
+        console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
       })
     );
   }

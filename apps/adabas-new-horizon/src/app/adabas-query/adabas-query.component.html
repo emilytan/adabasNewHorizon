@@ -1,5 +1,16 @@
 <h1>Adabas Data Query</h1>
-<ada-new-horizon-file-selection (dbFileSelect)="eventDbFileSelect($event)"></ada-new-horizon-file-selection>
-<ada-new-horizon-criteria></ada-new-horizon-criteria>
-<ada-new-horizon-query-statement></ada-new-horizon-query-statement>
-<ada-new-horizon-read-result></ada-new-horizon-read-result>
+<ada-new-horizon-file-selection
+  (dbFileSelection)="eventDbFileSelect($event)"
+  (dbFileSelected)="eventDbFileSelected($event)"
+></ada-new-horizon-file-selection>
+<ada-new-horizon-criteria
+  [fileSelected]="fileSelected"
+  [fileSelection]="selectedDBFile"
+></ada-new-horizon-criteria>
+<ada-new-horizon-query-statement
+  [fileSelected]="fileSelected"
+  [fileSelection]="selectedDBFile"
+></ada-new-horizon-query-statement>
+<ada-new-horizon-read-result
+  [readResult]="sampleResult"
+></ada-new-horizon-read-result>

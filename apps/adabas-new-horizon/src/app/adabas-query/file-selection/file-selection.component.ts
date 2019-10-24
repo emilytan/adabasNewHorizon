@@ -9,7 +9,8 @@ import { DbFileSelect } from '../model/dbFileSelect.model';
   styleUrls: ['./file-selection.component.scss']
 })
 export class FileSelectionComponent implements OnInit {
-  @Output('dbFileSelect') dbFileSelect = new EventEmitter();
+  @Output('dbFileSelection') dbFileSelect = new EventEmitter();
+  @Output('dbFileSelected') dbFileSelected = new EventEmitter();
   fileSelected = false;
   selectedChoice: DbFileSelect;
 
@@ -35,10 +36,12 @@ export class FileSelectionComponent implements OnInit {
   fileSelect(fileSelectForm: any) {
     this.selectedChoice = new DbFileSelect(fileSelectForm);
     this.fileSelected = true;
+    this.dbFileSelected.emit(this.fileSelected);
     this.dbFileSelect.emit(this.selectedChoice);
   }
 
   editSelection() {
     this.fileSelected = false;
+    this.dbFileSelected.emit(this.fileSelected);
   }
 }

@@ -8,6 +8,7 @@ import { QueryStatementComponent } from './query-statement/query-statement.compo
 import { ReadResultComponent } from './read-result/read-result.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 // path = '/adabas-query'
 const childRoutes: Routes = [
@@ -29,7 +30,8 @@ const childRoutes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ClarityModule
+    ClarityModule,
+    NgxJsonViewerModule
   ]
 })
 export class AdabasQueryModule { }

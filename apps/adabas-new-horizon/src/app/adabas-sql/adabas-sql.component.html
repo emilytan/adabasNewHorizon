@@ -1,0 +1,54 @@
+<div class="clr-row">
+  <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        Sql Statement
+      </div>
+      <form class="clr-form" style="width:100%;">
+        <div class="clr-form-control">
+          <!-- <label for="textarea-basic-error" class="clr-control-label">SQL </label> -->
+          <div class="clr-control-container" style="width:100%; height:200px">
+            <div class="clr-textarea-wrapper">
+              <textarea
+                name="first"
+                style="width:100%; height:190px"
+                placeholder="SQL Statement"
+                [(ngModel)]="sql"
+                class="clr-textarea"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <button (click)="execute(sql)" class="btn btn-primary">
+          Execute
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="clr-row">
+  <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        Sql Result
+      </div>
+      <ng-container *ngIf="result !== null">
+        <ada-new-horizon-read-result
+          [readResult]="result"
+        ></ada-new-horizon-read-result>
+      </ng-container>
+      <ng-container *ngIf="msg !== null">
+        <div class="alert alert-success" role="alert">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+              </div>
+              <span class="alert-text">{{ msg }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

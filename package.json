@@ -47,9 +47,10 @@
     "@nestjs/platform-express": "^6.2.4",
     "@nrwl/angular": "8.6.0",
     "@webcomponents/custom-elements": "^1.0.0",
-    "adabas-tcp": "0.0.31",
+    "adabas-tcp": "0.0.35",
     "core-js": "^2.5.4",
     "grunt-sass": "^3.1.0",
+    "ngx-json-viewer": "^2.4.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "~6.4.0",
     "zone.js": "^0.9.1"

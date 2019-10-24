@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import {
   MdcButtonModule,
   MdcFabModule,
@@ -21,6 +22,13 @@ const appRoutes: Routes = [
     loadChildren: () =>
       import('./adabas-query/adabas-query.module').then(
         m => m.AdabasQueryModule
+      )
+  },
+  {
+    path: 'sql',
+    loadChildren: () =>
+      import('./adabas-sql/adabas-sql.module').then(
+        m => m.AdabasSqlModule
       )
   },
   // path = '/'
@@ -43,9 +51,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ClarityModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxJsonViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
