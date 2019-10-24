@@ -31,7 +31,11 @@ export class SqlController {
       let callData = new CallData();
       const query: string = body.sql
         .replace(/^[ \t]+/gm, '')
-        .replace(/^[ \r\n]+/gm, ' ');
+        .replace(/^[ \r\n]+/gm, ' ')
+        .replace(/[ ][fF][rR][oO][mM][ ]/gm, ' FROM ')
+        .replace(/[ ][sS][eE][tT][ ]/gm, ' SET ')
+        .replace(/[ ][wW][hH][eE][rR][eE][ ]/gm, ' WHERE ')
+        .replace(/[ ][vV][aA][lL][uU][eE][sS][ ]/gm, ' VALUES ');
       const method = query.substring(0, 6).toUpperCase();
       let result = '';
       switch (method) {
@@ -71,14 +75,10 @@ export class SqlController {
               callData.fnr = file;
             } else {
               await ada.readFDT({ fnr: file }).then(res => {
-                // console.log('readFDT result', res);
                 callData.map = fieldToMap(fields, res, file);
               });
             }
           }
-
-          console.log(fields, file, callData);
-          // callData.isn = 1109;
           break;
         }
         case 'DELETE': {
@@ -129,11 +129,6 @@ export class SqlController {
               )
             );
           });
-
-          console.log(file, values, criteria);
-          // const obj = JSON.parse(value);
-          console.log(file, values, criteria);
-          console.log('check obj', obj);
           if (body.map) {
             const adaMap = parseAdaMap(body.map, file);
             callData = {
@@ -149,7 +144,6 @@ export class SqlController {
             };
           }
           return ada.update(callData).then(res => {
-            console.log(res);
             ada.close().then(() => ada.disconnect());
             return res;
           });
@@ -164,7 +158,6 @@ export class SqlController {
             .replace(/[ \t\n\r]+$/gm, '');
 
           const obj = JSON.parse(value);
-          console.log(file, value, obj);
           if (body.map) {
             const adaMap = parseAdaMap(body.map, file);
             callData = {
@@ -178,7 +171,7 @@ export class SqlController {
             };
           }
           return ada.create(callData).then(res => {
-            console.log(res);
+            // console.log(res);
             ada.close().then(() => ada.disconnect());
             return res;
           });
