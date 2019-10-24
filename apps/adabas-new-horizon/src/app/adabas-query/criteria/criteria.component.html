@@ -165,14 +165,20 @@
                   </button>
                 </div>
               </div>
-              <button
-                class="btn btn-link"
-                (click)="createMapPopUp()"
-                [disabled]="!fileSelected"
-              >
-                <clr-icon shape="plus-circle"></clr-icon>
-                CREATE ADABAS MAP
-              </button>
+              <div class="clr-form-control clr-row">
+                  <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
+                  </div>
+                  <div class="clr-control-container clr-col-12 clr-col-md-2">
+                      <button
+                      class="btn btn-link"
+                      (click)="createMapPopUp()"
+                      [disabled]="!fileSelected"
+                    >
+                      <clr-icon shape="plus-circle"></clr-icon>
+                      CREATE ADABAS MAP
+                    </button>
+                  </div>
+                </div>
               <div class="clr-form-control clr-row">
                 <div class="clr-control-wrapper clr-col-2">
                   <button
