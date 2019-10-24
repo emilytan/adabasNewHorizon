@@ -59,6 +59,9 @@ export class CriteriaComponent implements OnInit, OnChanges {
     // console.log(changes);
     if (changes.hasOwnProperty('fileSelected')) {
       this.int_fileSelected = changes.fileSelected.currentValue;
+      if (!this.int_fileSelected) {
+        this.criteriaConfirm = false;
+      }
     }
     if (changes.hasOwnProperty('fileSelected')) {
       this.int_fileSelection = changes.fileSelection.currentValue;
