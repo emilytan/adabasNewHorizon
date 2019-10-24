@@ -14,6 +14,7 @@
   [fileSelection]="selectedDBFile"
   [criteriaInput]="criteriaInput"
   [criteriaConfirmation]="criteriaConfirmation"
+  (execute)="eventExecuteSqlQuery($event)"
 ></ada-new-horizon-query-statement>
 <ada-new-horizon-read-result
   [readResult]="sampleResult"

@@ -13,6 +13,7 @@ export class AdabasQueryComponent implements OnInit {
   sampleResult;
   criteriaInput;
   criteriaConfirmation;
+  sqlStatement = "";
 
   constructor() {}
 
@@ -35,5 +36,9 @@ export class AdabasQueryComponent implements OnInit {
 
   eventCriteriaConfirmation(event: boolean) {
     this.criteriaConfirmation = event;
+  }
+
+  eventExecuteSqlQuery(event: string) {
+    this.sqlStatement = event;
   }
 }

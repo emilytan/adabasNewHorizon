@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { DbFileSelect } from '../model/dbFileSelect.model';
 import { functionType } from '../model/function-type.model';
 import { CriteriaModel } from '../model/criteria.model';
@@ -13,6 +13,7 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   @Input('fileSelection') fileSelection: DbFileSelect;
   @Input('criteriaInput') criteriaInput: CriteriaModel;
   @Input('criteriaConfirmation') criteriaConfirmation;
+  @Output('execute') execute = new EventEmitter();
   sqlStatement = "";
 
   constructor() { }
@@ -56,4 +57,8 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   buildUpdate() {}
 
   buildCreate() {}
+
+  executeQuery() {
+    this.execute.emit(this.sqlStatement);
+  }
 }
