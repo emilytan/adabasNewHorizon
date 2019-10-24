@@ -41,7 +41,7 @@ export class AdabasService {
   getBrowseFileService() {
     return this.getRest('fileio/browsefile').pipe(
       map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
+        // console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
       catchError((err) => {
@@ -51,11 +51,8 @@ export class AdabasService {
   }
 
   readFileService(fileName) {
-    const readBody = '{"file":"' + fileName + '"}';
-    console.log('readBody:', readBody);
-    const postBody = JSON.stringify(readBody);
-    postBody.toString();
-    return this.postRest('fileio/readfile', postBody).pipe(
+    const postBody = JSON.stringify({ file: fileName });
+    return this.postRest('fileio/readfile', postBody.toString()).pipe(
       map(jsonResponse => {
         console.log('jsonResponse', jsonResponse);
         return jsonResponse;

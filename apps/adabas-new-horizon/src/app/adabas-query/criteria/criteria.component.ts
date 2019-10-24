@@ -42,15 +42,9 @@ export class CriteriaComponent implements OnInit {
     this.fileContentDialog = true;
     this.fileContentHeader = 'File Content of ' + criteriaForm.adabasMap;
     this.adabasSvc.readFileService(criteriaForm.adabasMap).subscribe(response => {
-      console.log('read response', response);
       this.fileContentData = response;
       console.log('fileContentData', this.fileContentData);
-  
-    });
-    // const fileContent = '{"map": [{"type": "ALPHA","shortname": "AA","longname": "testAA","size": "8"},{"type": "GROUP","shortname": "AB","longname": "testAB","child": [{"type": "ALPHA","shortname": "AC","longname": "testAC","size": 20}]}]}';
-    // JSON.stringify(fileContent);
-    
-   
+    });  
   }
 
 

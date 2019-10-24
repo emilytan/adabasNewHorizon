@@ -25,7 +25,7 @@ export class FileIoController {
         }
     }
 
-    @Post('browsefile')
+    @Get('browsefile')
     async getbrowse(@Body() body): Promise<any> {
         try {
             const selectedpath = body.path || './';
