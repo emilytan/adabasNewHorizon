@@ -11,6 +11,7 @@ import { DbFileSelect } from '../model/dbFileSelect.model';
 import { functionType } from '../model/function-type.model';
 import { CriteriaModel } from '../model/criteria.model';
 import { AdabasService } from '../adabas.service';
+import { RESTAdaMap } from '@ada-new-horizon/api-interfaces';
 
 @Component({
   selector: 'ada-new-horizon-query-statement',
@@ -24,6 +25,7 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   @Input('criteriaConfirmation') criteriaConfirmation;
   @Output('execute') execute = new EventEmitter();
   sqlStatement = '';
+  adaMapContent;
 
   constructor(private adabasSvc: AdabasService) {}
 
@@ -31,8 +33,21 @@ export class QueryStatementComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.fileSelected && this.criteriaConfirmation) {
-      console.log('populateDB now!');
-      this.buildSqlStatement();
+      console.log('populate SQL Statement now!');
+      this.adaMapContent = new Array<RESTAdaMap>();
+      if (
+        this.criteriaInput.adabasMap !== '' &&
+        this.criteriaInput.adabasMap !== 'none'
+      ) {
+        this.adabasSvc
+          .readFileService(this.criteriaInput.adabasMap)
+          .subscribe(content => {
+            this.adaMapContent = content['map'];
+            this.buildSqlStatement();
+          });
+      } else {
+        this.buildSqlStatement();
+      }
     }
   }
 
@@ -51,14 +66,20 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   }
 
   buildSelect() {
-    this.sqlStatement = 'SELECT * FROM ' + this.fileSelection.fnr + ' ';
+    let longnames = new Array<string>();
+    this.sqlStatement = 'SELECT ';
+    if (this.adaMapContent.length > 0) {
+      longnames = this.getLongName();
+      this.sqlStatement += longnames.join(',');
+    } else {
+      this.sqlStatement += '*';
+    }
+    this.sqlStatement += ' FROM ' + this.fileSelection.fnr + ' ';
     if (this.criteriaInput.textisn !== '') {
       this.sqlStatement += 'WHERE ISN = ' + this.criteriaInput.textisn + ' ';
-    }
-    if (this.criteriaInput.textfilter !== '') {
+    } else if (this.criteriaInput.textfilter !== '') {
       this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter + ' ';
     }
-    this.readFile();
   }
 
   buildDelete() {}
@@ -67,15 +88,14 @@ export class QueryStatementComponent implements OnInit, OnChanges {
 
   buildCreate() {}
 
+  getLongName(): string[] {
+    let longnames = new Array<string>();
+    this.adaMapContent.forEach(element => {
+      longnames.push(element['longName']);
+    });
+    return longnames;
+  }
   executeQuery() {
     this.execute.emit(this.sqlStatement);
-  }
-
-  readFile() {
-    this.adabasSvc
-      .readFileService(this.criteriaInput.adabasMap)
-      .subscribe(response => {
-        console.log(response.map);
-      });
   }
 }

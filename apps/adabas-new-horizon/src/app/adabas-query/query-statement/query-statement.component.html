@@ -7,11 +7,13 @@
       <div class="card-block">
         <div class="card-text">
           <ng-template [ngIf]="fileSelected && criteriaConfirmation">
+            <br>
             <div class="clr-row">
               <div class="clr-col-12">
                 {{ sqlStatement }}
               </div>
             </div>
+            <br>
             <div class="clr-row">
               <div class="clr-col-12">
                 <button class="btn btn-outline" (click)="executeQuery()">Execute</button>
