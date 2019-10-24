@@ -1,26 +1,38 @@
 <div class="clr-row">
-    <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
-        <div class="card">
-            <div class="card-header">
-                READ Criteria
+  <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        READ Criteria
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <form class="clr-form clr-form-compact" [formGroup]="criteriaForm">
+            <div class="clr-form-control clr-row">
+              <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
+                <input
+                  type="checkbox"
+                  id="vertical-checkbox1"
+                  name="checkbox-full"
+                  value="isn"
+                  class="clr-checkbox"
+                />
+                <label for="vertical-checkbox1" class="clr-control-label"
+                  >ISN</label
+                >
+              </div>
+              <div class="clr-control-container clr-col-12 clr-col-md-10">
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    id="vertical-checkbox1"
+                    placeholder="ISN Number"
+                    class="clr-input"
+                    formControlName="isn"
+                  />
+                </div>
+              </div>
             </div>
-            <div class="card-block">
-                <div class="card-text">
-                    <form class="clr-form clr-form-compact" [formGroup]="criteriaForm">
-                        <div class="clr-form-control clr-row">
-                            <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
-                                <input type="checkbox" id="vertical-checkbox1" name="checkbox-full" value="isn"
-                                    class="clr-checkbox">
-                                <label for="vertical-checkbox1" class="clr-control-label">ISN</label>
-                            </div>
-                            <div class="clr-control-container clr-col-12 clr-col-md-10">
-                                <div class="clr-input-wrapper">
-                                    <input type="text" id="vertical-checkbox1" placeholder="ISN Number"
-                                        class="clr-input" formControlName="isn">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="clr-form-control clr-row">
+            <!-- <div class="clr-form-control clr-row">
                             <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                                 <input type="checkbox" id="vertical-checkbox2" name="checkbox-full" value="filter"
                                     class="clr-checkbox">
@@ -33,80 +45,127 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="clr-form-control clr-row">
-                            <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
-                                <input type="checkbox" id="vertical-checkbox3" name="checkbox-full" value="adabasMap"
-                                    class="clr-checkbox">
-                                <label for="vertical-checkbox3" class="clr-control-label">Adabas Map</label>
-                            </div>
-                            <div class="clr-control-container clr-col-12 clr-col-md-2">
-                                <div class="clr-input-wrapper">
-                                    <div class="clr-select-wrapper">
-                                        <select id="select-basic" class="clr-select" formControlName="adabasMap">
-                                            <option value="1none">None</option>
-                                            <option *ngFor="let list of browseList" [ngValue]="list">{{list}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clr-control-container clr-col-12 clr-col-md-6">
-                                <button class="btn btn-link" (click)="readFile(criteriaForm.value)">FILE
-                                    CONTENT</button>
-                                <button class="btn btn-link" (click)="writeFile()">CREATE ADABAS MAP</button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="clr-form-control clr-row">
+              <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
+                <input
+                  type="checkbox"
+                  id="vertical-checkbox3"
+                  name="checkbox-full"
+                  value="adabasMap"
+                  class="clr-checkbox"
+                />
+                <label for="vertical-checkbox3" class="clr-control-label"
+                  >Adabas Map</label
+                >
+              </div>
+              <div class="clr-control-container clr-col-12 clr-col-md-2">
+                <div class="clr-input-wrapper">
+                  <div class="clr-select-wrapper">
+                    <select
+                      id="select-basic"
+                      class="clr-select"
+                      formControlName="adabasMap"
+                    >
+                      <option value="1none">None</option>
+                      <option
+                        *ngFor="let list of browseList"
+                        [ngValue]="list"
+                        >{{ list }}</option
+                      >
+                    </select>
+                  </div>
                 </div>
+              </div>
+              <div class="clr-control-container clr-col-12 clr-col-md-6">
+                <button
+                  class="btn btn-link"
+                  (click)="readFile(criteriaForm.value)"
+                >
+                  FILE CONTENT
+                </button>
+                <button class="btn btn-link" (click)="writeFile()">
+                  CREATE ADABAS MAP
+                </button>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!---------------------------------------- READ FILE CONTENT MODAL ---------------------------------------->
-<div *ngIf='fileContentDialog===true'>
-    <clr-modal [(clrModalOpen)]="fileContentDialog">
-        <h3 class="modal-title">{{fileContentHeader}}</h3>
-        <div class="modal-body">
-            <ngx-json-viewer [json]="fileContentData"></ngx-json-viewer>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="fileContentDialog=false">Ok</button>
-        </div>
-    </clr-modal>
+<div *ngIf="fileContentDialog === true">
+  <clr-modal [(clrModalOpen)]="fileContentDialog">
+    <h3 class="modal-title">{{ fileContentHeader }}</h3>
+    <div class="modal-body">
+      <ngx-json-viewer [json]="fileContentData"></ngx-json-viewer>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="fileContentDialog = false"
+      >
+        Ok
+      </button>
+    </div>
+  </clr-modal>
 </div>
 
 <!---------------------------------------- CREATE MAP MODAL ---------------------------------------->
-<div *ngIf='createMapDialog===true'>
-    <clr-modal [(clrModalOpen)]="createMapDialog">
-        <h3 class="modal-title">Create Adabas Map</h3>
-        <div class="modal-body">
-            <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
-                <div class="clr-form-control clr-row">
-                    <div class="clr-input-wrapper clr-col-2">
-                        <label for="example" class="clr-control-label">File Name</label>
-                    </div>
-                    <div class="clr-control-container clr-col-4">
-                        <div class="clr-input-wrapper">
-                            <input type="text" id="fileName" formControlName="fileName" placeholder="File Name" class="clr-input" />
-                        </div>
-                    </div>
-                </div>
-                <div class="clr-form-control clr-row">
-                    <div class="clr-input-wrapper clr-col-2">
-                        <label for="example" class="clr-control-label">Adabas Map</label>
-                    </div>
-                    <div class="clr-control-container clr-col-4">
-                        <div class="clr-input-wrapper">
-                            <input type="text" id="adabasMap" formControlName="adabasMap" placeholder="Adabas Map" class="clr-input" />
-                        </div>
-                    </div>
-                </div>
-            </form>
+<div *ngIf="createMapDialog === true">
+  <clr-modal [(clrModalOpen)]="createMapDialog">
+    <h3 class="modal-title">Create Adabas Map</h3>
+    <div class="modal-body">
+      <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
+        <div class="clr-form-control clr-row">
+          <div class="clr-input-wrapper clr-col-2">
+            <label for="example" class="clr-control-label">Adabas Map</label>
+          </div>
+          <div class="clr-control-container clr-col-4">
+            <div class="clr-input-wrapper">
+              <input
+                type="text"
+                id="adabasMap"
+                formControlName="adabasMap"
+                placeholder="Adabas Map"
+                class="clr-input"
+              />
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="writeFile()">SAVE</button>
-            <button type="button" class="btn btn-primary" (click)="createMapDialog=false">CANCEL</button>
 
+        <div class="clr-form-control clr-row">
+          <div class="clr-input-wrapper clr-col-2">
+            <label for="example" class="clr-control-label">File Name</label>
+          </div>
+          <div class="clr-control-container clr-col-4">
+            <div class="clr-input-wrapper">
+              <input
+                type="text"
+                id="fileName"
+                formControlName="fileName"
+                placeholder="File Name"
+                class="clr-input"
+              />
+            </div>
+          </div>
         </div>
-    </clr-modal>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="writeFile()">
+        SAVE
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="createMapDialog = false"
+      >
+        CANCEL
+      </button>
+    </div>
+  </clr-modal>
 </div>
