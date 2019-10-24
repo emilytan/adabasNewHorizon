@@ -11,12 +11,14 @@ export class FDT {
 }
 
 export class AdabasMap {
+  state?: boolean;
   shortName: string;
   type: string;
   size: number;
   longName: string;
 
   constructor() {
+    this.state = false;
     this.shortName = '';
     this.type = '';
     this.size = null;
@@ -25,13 +27,11 @@ export class AdabasMap {
 }
 
 export enum FDTFormat {
-  A = 'alpha',
-  B = 'binary',
-  F = 'float',
-  G = 'fixed',
-  P = 'packed',
-  U = 'unpacked',
-  W = 'wide',
-  N = 'unpacked',
-  I = 'fixed'
+  A = 'ALPHA',
+  B = 'BINARY',
+  F = 'FLOAT',
+  G = 'FIXED',
+  P = 'PACKED',
+  U = 'UNPACKED',
+  W = 'WIDE',
 }
