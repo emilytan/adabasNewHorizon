@@ -3,7 +3,8 @@ import {
   OnInit,
   Input,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  ChangeDetectorRef
 } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
@@ -26,7 +27,11 @@ export class CriteriaComponent implements OnInit, OnChanges {
   criteriaForm = new FormGroup({
     isn: new FormControl('', null),
     filter: new FormControl('', null),
-    adabasMap: new FormControl('none', null)
+    adabasMap: new FormControl('none', null),
+    textfilter: new FormControl('', null),
+    textset: new FormControl('', null),
+    textvalue: new FormControl('', null),
+    textisn: new FormControl('', null),
   });
 
   fileContentHeader: string;
@@ -40,10 +45,13 @@ export class CriteriaComponent implements OnInit, OnChanges {
 
   fdtList = new Array<AdabasMap>();
 
-  constructor(private adabasSvc: AdabasService) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private adabasSvc: AdabasService
+  ) {}
 
   ngOnInit() {
-    
+    this.getBrowseList();    
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,6 +62,7 @@ export class CriteriaComponent implements OnInit, OnChanges {
     if (changes.hasOwnProperty('fileSelected')) {
       this.int_fileSelection = changes.fileSelection.currentValue;
     }
+    this.cd.detectChanges();
   }
 
   getBrowseList(){

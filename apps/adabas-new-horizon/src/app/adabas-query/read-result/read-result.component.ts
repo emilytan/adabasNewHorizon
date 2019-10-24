@@ -18,14 +18,19 @@ export class ReadResultComponent implements OnInit, OnChanges {
   pageSize = 10;
   pagination;
   paginationEnabled = true;
+  showTable = false;
   constructor() {}
 
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.allData.data = this.readResult;
-    this.sanatizeData();
-    this.populateDisplay(0, 19);
+    this.showTable = false;
+    if (changes.readResult.currentValue.length > 0) {
+      this.showTable = true;
+      this.allData.data = changes.readResult.currentValue;
+      this.sanatizeData();
+      this.populateDisplay(0, 19);
+    }
   }
 
   refresh(event) {
