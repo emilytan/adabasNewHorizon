@@ -36,11 +36,11 @@
       <form class="clr-form" style="width:100%;">
         <div class="clr-form-control">
           <!-- <label for="textarea-basic-error" class="clr-control-label">SQL </label> -->
-          <div class="clr-control-container" style="width:100%; height:200px">
+          <div class="clr-control-container" style="width:100%; height:100px">
             <div class="clr-textarea-wrapper">
               <textarea
                 name="first"
-                style="width:100%; height:190px"
+                style="width:100%; height:90px"
                 placeholder="SQL Statement"
                 [(ngModel)]="sql"
                 class="clr-textarea"
@@ -78,6 +78,18 @@
           </div>
         </div>
       </ng-container>
+      <ng-container *ngIf="error !== null">
+            <div class="alert alert-danger" role="alert">
+              <div class="alert-items">
+                <div class="alert-item static">
+                  <div class="alert-icon-wrapper">
+                    <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                  </div>
+                  <span class="alert-text">{{ error }}</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
     </div>
   </div>
 </div>
