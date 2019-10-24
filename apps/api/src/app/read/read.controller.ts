@@ -1,10 +1,10 @@
-import { Controller, Get, Query, Param, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Query, Param, Body, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { Adabas, AdabasMap } from 'adabas-tcp';
 import { parseAdaMap } from '../functions/sharedfunction';
 
 @Controller(':host/:port/read')
 export class ReadController {
-    @Get('fileid/:fileid')
+    @Post('fileid/:fileid')
     async getAll(@Param('fileid') fileid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
@@ -29,7 +29,7 @@ export class ReadController {
             throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Get('fileid/:fileid/isn/:isnid')
+    @Post('fileid/:fileid/isn/:isnid')
     async getbyISN(@Param('fileid') fileid, @Param('isnid') isnid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
@@ -54,7 +54,7 @@ export class ReadController {
             throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Get('fileid/:fileid/criteria')
+    @Post('fileid/:fileid/criteria')
     async getbyCriteria(@Param('fileid') fileid, @Body() body, @Param('host') host, @Param('port') port): Promise<any> {
         try {
             const ada = new Adabas(host, port);
