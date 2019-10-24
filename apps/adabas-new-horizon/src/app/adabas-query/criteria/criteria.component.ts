@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, map, } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
@@ -10,12 +10,11 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
   styleUrls: ['./criteria.component.scss']
 })
 export class CriteriaComponent implements OnInit {
-
   browseList: string[];
   criteriaForm = new FormGroup({
     isn: new FormControl('', null),
     filter: new FormControl('', null),
-    adabasMap: new FormControl('', null),
+    adabasMap: new FormControl('', null)
   });
 
   fileContentHeader: string;
@@ -25,10 +24,10 @@ export class CriteriaComponent implements OnInit {
   createMapDialog: boolean;
   createMapForm = new FormGroup({
     fileName: new FormControl('', null),
-    adabasMap: new FormControl('', null),
+    adabasMap: new FormControl('', null)
   });
 
-  constructor(private adabasSvc: AdabasService) { }
+  constructor(private adabasSvc: AdabasService) {}
 
   ngOnInit() {
     this.adabasSvc.getBrowseFileService().subscribe(response => {
@@ -40,11 +39,12 @@ export class CriteriaComponent implements OnInit {
   readFile(criteriaForm) {
     this.fileContentDialog = true;
     this.fileContentHeader = 'File Content of ' + criteriaForm.adabasMap;
-    this.adabasSvc.readFileService(criteriaForm.adabasMap).subscribe(response => {
-      this.fileContentData = response;
-    });
+    this.adabasSvc
+      .readFileService(criteriaForm.adabasMap)
+      .subscribe(response => {
+        this.fileContentData = response;
+      });
   }
-
 
   writeFile() {
     this.createMapDialog = true;
@@ -52,8 +52,4 @@ export class CriteriaComponent implements OnInit {
       console.log('write response', response);
     });
   }
-
-
-
-
 }
