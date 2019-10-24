@@ -7,17 +7,20 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AdabasService {
+  constructor(private httpreq: HttpClient) {}
 
-  constructor(private httpreq: HttpClient) { }
-
-  
   getRest(resturl: string): any {
-    const url =  'http://localhost:3333/api/' + resturl;
+    const url = 'http://localhost:3333/api/' + resturl;
     console.log('url', url);
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.httpreq.get(url, httpOptions).pipe(
-      timeoutWith(180000, throwError(new Error('Server request timeout: ' + resturl))),
-      catchError((e) => {
+      timeoutWith(
+        180000,
+        throwError(new Error('Server request timeout: ' + resturl))
+      ),
+      catchError(e => {
         console.log('e', e);
         return throwError(e);
       })
@@ -25,18 +28,22 @@ export class AdabasService {
   }
 
   postRest(resturl: string, data: string): any {
-    const url =  'http://localhost:3333/api/' + resturl;
+    const url = 'http://localhost:3333/api/' + resturl;
     console.log('url', url);
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     return this.httpreq.post(url, data, httpOptions).pipe(
-      timeoutWith(180000, throwError(new Error('Server request timeout: ' + resturl))),
-      catchError((e) => {
+      timeoutWith(
+        180000,
+        throwError(new Error('Server request timeout: ' + resturl))
+      ),
+      catchError(e => {
         console.log('e', e);
         return throwError(e);
       })
     );
   }
-
 
   getBrowseFileService() {
     return this.getRest('fileio/browsefile').pipe(
@@ -44,7 +51,7 @@ export class AdabasService {
         // console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
-      catchError((err) => {
+      catchError(err => {
         return err;
       })
     );
@@ -57,28 +64,40 @@ export class AdabasService {
         console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
-      catchError((err) => {
+      catchError(err => {
         return err;
       })
     );
   }
 
-  writeFileService() {
-    const fileName = 'test2.txt';
-    const fileContent = '{"map": [{"type": "ALPHA","shortname": "AA","longname": "testAA","size": "8"},{"type": "GROUP","shortname": "AB","longname": "testAB","child": [{"type": "ALPHA","shortname": "AC","longname": "testAC","size": 20}]}]}';
-    const writeBody = '{ "file":"' + fileName + '", "content":"' + fileContent.toString() + '" }';
-    console.log('write body data :', writeBody);
-
-    return this.postRest('fileio/writefile', writeBody).pipe(
+  readFDT(host: string, port: number, fileId: number) {
+    const url = host + '/' + port + '/fdt/fileid/' + fileId;
+    return this.getRest(url).pipe(
       map(jsonResponse => {
         console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
-      catchError((err) => {
+      catchError(err => {
         return err;
       })
     );
-
   }
 
+  writeFileService(fileName: string, fileContent: string) {
+    // const fileName = 'test2.txt';
+    // const fileContent =
+    //   '{"map": [{"type": "ALPHA","shortname": "AA","longname": "testAA","size": "8"},{"type": "GROUP","shortname": "AB","longname": "testAB","child": [{"type": "ALPHA","shortname": "AC","longname": "testAC","size": 20}]}]}';
+    const postBody = JSON.stringify({ file: fileName, content: fileContent.toString() });
+    console.log('write body data :', postBody);
+
+    return this.postRest('fileio/writefile', postBody).pipe(
+      map(jsonResponse => {
+        console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
 }
