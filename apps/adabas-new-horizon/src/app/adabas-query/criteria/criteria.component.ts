@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError, map, } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
   selector: 'ada-new-horizon-criteria',
@@ -37,26 +37,23 @@ export class CriteriaComponent implements OnInit {
     });
   }
 
-
-  readFile(criteriaForm){
+  readFile(criteriaForm) {
     this.fileContentDialog = true;
     this.fileContentHeader = 'File Content of ' + criteriaForm.adabasMap;
     this.adabasSvc.readFileService(criteriaForm.adabasMap).subscribe(response => {
       this.fileContentData = response;
-      console.log('fileContentData', this.fileContentData);
-    });  
+    });
   }
 
 
-
-  writeFile(){
+  writeFile() {
     this.createMapDialog = true;
     this.adabasSvc.writeFileService().subscribe(response => {
       console.log('write response', response);
     });
   }
 
-  
+
 
 
 }

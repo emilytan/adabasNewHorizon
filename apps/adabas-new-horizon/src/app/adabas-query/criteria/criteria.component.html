@@ -67,7 +67,7 @@
     <clr-modal [(clrModalOpen)]="fileContentDialog">
         <h3 class="modal-title">{{fileContentHeader}}</h3>
         <div class="modal-body">
-            <p>{{fileContentData}}</p>
+            <ngx-json-viewer [json]="fileContentData"></ngx-json-viewer>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" (click)="fileContentDialog=false">Ok</button>
