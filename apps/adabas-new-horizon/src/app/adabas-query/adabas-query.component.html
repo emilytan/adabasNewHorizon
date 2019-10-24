@@ -3,6 +3,9 @@
   (dbFileSelection)="eventDbFileSelect($event)"
   (dbFileSelected)="eventDbFileSelected($event)"
 ></ada-new-horizon-file-selection>
-<ada-new-horizon-criteria></ada-new-horizon-criteria>
+<ada-new-horizon-criteria
+  [fileSelected]="fileSelected"
+  [fileSelection]="selectedDBFile"
+></ada-new-horizon-criteria>
 <ada-new-horizon-query-statement></ada-new-horizon-query-statement>
 <ada-new-horizon-read-result></ada-new-horizon-read-result>

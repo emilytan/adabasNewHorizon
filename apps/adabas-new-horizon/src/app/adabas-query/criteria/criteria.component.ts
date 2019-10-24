@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -10,6 +10,8 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
   styleUrls: ['./criteria.component.scss']
 })
 export class CriteriaComponent implements OnInit {
+  @Input('fileSelected') fileSelected;
+  @Input('fileSelection') fileSelection;
   browseList: string[];
   criteriaForm = new FormGroup({
     isn: new FormControl('', null),
@@ -37,6 +39,8 @@ export class CriteriaComponent implements OnInit {
   }
 
   readFile(criteriaForm) {
+    console.log(this.fileSelected);
+    console.log(this.fileSelection);
     this.fileContentDialog = true;
     this.fileContentHeader = 'File Content of ' + criteriaForm.adabasMap;
     this.adabasSvc
