@@ -10,12 +10,14 @@ export class AdabasSqlComponent implements OnInit {
   sql = 'SELect * FROM 11 WHERE AA=000095';
   result = null;
   msg = null;
+  host = '';
+  port = '';
   constructor(private svc: AdabasService) {}
 
   ngOnInit() {}
 
   execute(query) {
-    this.svc.sql('localhost', 50001, query).subscribe(res => {
+    this.svc.sql(this.host, Number(this.port), query).subscribe(res => {
       if (typeof res === 'number') {
         this.result = null;
         this.msg =
