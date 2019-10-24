@@ -6,10 +6,12 @@
 <ada-new-horizon-criteria
   [fileSelected]="fileSelected"
   [fileSelection]="selectedDBFile"
+  (criteriaSelected)="eventCriteriaSelect($event)"
 ></ada-new-horizon-criteria>
 <ada-new-horizon-query-statement
   [fileSelected]="fileSelected"
   [fileSelection]="selectedDBFile"
+  [criteriaInput]="criteriaInput"
 ></ada-new-horizon-query-statement>
 <ada-new-horizon-read-result
   [readResult]="sampleResult"

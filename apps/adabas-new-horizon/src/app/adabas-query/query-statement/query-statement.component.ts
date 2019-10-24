@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class QueryStatementComponent implements OnInit {
   @Input('fileSelected') fileSelected;
   @Input('fileSelection') fileSelection;
+  @Input('criteriaInput') criteriaInput;
 
   constructor() { }
 

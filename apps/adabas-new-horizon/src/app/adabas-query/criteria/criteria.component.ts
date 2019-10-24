@@ -4,7 +4,9 @@ import {
   Input,
   SimpleChanges,
   OnChanges,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
@@ -21,6 +23,7 @@ import { DbFileSelect } from '../model/dbFileSelect.model';
 export class CriteriaComponent implements OnInit, OnChanges {
   @Input('fileSelected') fileSelected;
   @Input('fileSelection') fileSelection: DbFileSelect;
+  @Output('criteriaSelected') criteriaSelected = new EventEmitter();
   int_fileSelected;
   int_fileSelection: DbFileSelect;
   criteriaConfirm = false;
@@ -168,6 +171,7 @@ export class CriteriaComponent implements OnInit, OnChanges {
 
   submitCriteria(criteria) {
     this.criteriaConfirm = true;
+    this.criteriaSelected.emit(criteria);
   }
 
   editCriteria() {

@@ -11,6 +11,7 @@ export class AdabasQueryComponent implements OnInit {
   selectedDBFile: DbFileSelect;
   fileSelected = false;
   sampleResult;
+  criteriaInput;
   constructor() {}
 
   ngOnInit() {
@@ -24,5 +25,9 @@ export class AdabasQueryComponent implements OnInit {
   eventDbFileSelected(event: boolean) {
     this.selectedDBFile = new DbFileSelect(event);
     this.fileSelected = event;
+  }
+
+  eventCriteriaSelect(event: any) {
+    this.criteriaInput = event;
   }
 }
