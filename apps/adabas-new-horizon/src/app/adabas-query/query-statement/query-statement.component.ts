@@ -1,7 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { DbFileSelect } from '../model/dbFileSelect.model';
 import { functionType } from '../model/function-type.model';
 import { CriteriaModel } from '../model/criteria.model';
+import { AdabasService } from '../adabas.service';
 
 @Component({
   selector: 'ada-new-horizon-query-statement',
@@ -13,42 +20,42 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   @Input('fileSelection') fileSelection: DbFileSelect;
   @Input('criteriaInput') criteriaInput: CriteriaModel;
   @Input('criteriaConfirmation') criteriaConfirmation;
-  sqlStatement = "";
+  sqlStatement = '';
 
-  constructor() { }
+  constructor(private adabasSvc: AdabasService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.fileSelected && this.criteriaConfirmation) {
-      console.log("populateDB now!");
+    if (this.fileSelected && this.criteriaConfirmation) {
+      console.log('populateDB now!');
       this.buildSqlStatement();
     }
   }
 
   buildSqlStatement() {
-    if(this.fileSelection.ddlFunction === functionType.read) {
+    if (this.fileSelection.ddlFunction === functionType.read) {
       this.buildSelect();
-    } else if(this.fileSelection.ddlFunction === functionType.delete) {
+    } else if (this.fileSelection.ddlFunction === functionType.delete) {
       this.buildDelete();
-    } else if(this.fileSelection.ddlFunction === functionType.update) {
+    } else if (this.fileSelection.ddlFunction === functionType.update) {
       this.buildUpdate();
-    } else if(this.fileSelection.ddlFunction === functionType.create) {
+    } else if (this.fileSelection.ddlFunction === functionType.create) {
       this.buildCreate();
     } else {
-      console.log("Invalid function type");
+      console.log('Invalid function type');
     }
   }
 
   buildSelect() {
-    this.sqlStatement = "SELECT * FROM " + this.fileSelection.fnr + " ";
-    if (this.criteriaInput.textisn !== "") {
-      this.sqlStatement += "WHERE ISN = " + this.criteriaInput.textisn + " ";
+    this.sqlStatement = 'SELECT * FROM ' + this.fileSelection.fnr + ' ';
+    if (this.criteriaInput.textisn !== '') {
+      this.sqlStatement += 'WHERE ISN = ' + this.criteriaInput.textisn + ' ';
     }
-    if (this.criteriaInput.textfilter !== "") {
-      this.sqlStatement += "WHERE " + this.criteriaInput.textfilter + " ";
+    if (this.criteriaInput.textfilter !== '') {
+      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter + ' ';
     }
+    this.readFile();
   }
 
   buildDelete() {}
@@ -56,4 +63,12 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   buildUpdate() {}
 
   buildCreate() {}
+
+  readFile() {
+    this.adabasSvc
+      .readFileService(this.criteriaInput.adabasMap)
+      .subscribe(response => {
+        console.log(response.map);
+      });
+  }
 }
