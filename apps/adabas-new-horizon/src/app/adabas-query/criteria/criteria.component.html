@@ -246,7 +246,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let list of fdtList; let i = index">
-              <td class="right">
+              <td class="right" style="padding-left: 25px">
                 <input type="checkbox" clrCheckbox [(ngModel)]="list.state" />
               </td>
               <td>{{ list.shortName }}</td>
