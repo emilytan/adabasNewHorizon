@@ -97,4 +97,18 @@ export class AdabasService {
       })
     );
   }
+
+  sql(host: string, port: number, sqlstring: string) {
+    const url = host + '/' + port + '/sql';
+    const postBody = JSON.stringify({ sql: sqlstring });
+    return this.postRest(url, postBody).pipe(
+      map(jsonResponse => {
+        console.log('jsonResponse', jsonResponse);
+        return jsonResponse;
+      }),
+      catchError(err => {
+        return err;
+      })
+    );
+  }
 }

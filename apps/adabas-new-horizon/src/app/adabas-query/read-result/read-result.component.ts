@@ -40,9 +40,13 @@ export class ReadResultComponent implements OnInit, OnChanges {
   }
 
   populateDisplay(from: number, to: number) {
+    let lastData = to;
     this.displayData = new Array();
-    for (let i = from; i <= to; i++) {
-      this.displayData.push(this.allData.data[i]);
+    if (this.allData.data.length - 1 < to) {
+      lastData = this.allData.data.length - 1;
+    }
+    for (let i = from; i <= lastData; i++) {
+        this.displayData.push(this.allData.data[i]);
     }
   }
 

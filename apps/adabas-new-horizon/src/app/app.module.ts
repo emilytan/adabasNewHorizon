@@ -24,6 +24,13 @@ const appRoutes: Routes = [
         m => m.AdabasQueryModule
       )
   },
+  {
+    path: 'sql',
+    loadChildren: () =>
+      import('./adabas-sql/adabas-sql.module').then(
+        m => m.AdabasSqlModule
+      )
+  },
   // path = '/'
   { path: '', redirectTo: '/adabas-query', pathMatch: 'full' }
 ];
@@ -50,4 +57,4 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
