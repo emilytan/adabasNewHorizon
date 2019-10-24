@@ -2,7 +2,7 @@ import { functionType } from './function-type.model';
 
 export class DbFileSelect {
     host: string;
-    port: string;
+    port: number;
     fnr: number;
     ddlFunction: functionType;
 

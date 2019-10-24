@@ -74,21 +74,21 @@ export class CriteriaComponent implements OnInit, OnChanges {
 
   createMapPopUp() {
     this.createMapDialog = true;
-    this.adabasSvc.readFDT('SAG-4YG72X2', 53222, 22).subscribe(response => {
-      console.log('readFDT response', response);
-      let fdt: FDT;
-      for (let i = 0; i < response.length; i++) {
-        fdt = {
-          name: response[i].name,
-          format: response[i].format,
-          length: response[i].length
-        };
-        this.fdtList.push(fdt);
-      }
-      console.log('fdtList', this.fdtList);
-    });
-
-
+    if (this.fileSelected){
+      this.adabasSvc.readFDT(this.fileSelection.host, this.fileSelection.port, this.fileSelection.fnr).subscribe(response => {
+        console.log('readFDT response', response);
+        let fdt: FDT;
+        for (let i = 0; i < response.length; i++) {
+          fdt = {
+            name: response[i].name,
+            format: response[i].format,
+            length: response[i].length
+          };
+          this.fdtList.push(fdt);
+        }
+        console.log('fdtList', this.fdtList);
+      });
+    }
 
    
   }
