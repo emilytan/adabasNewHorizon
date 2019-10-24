@@ -50,6 +50,7 @@
     "adabas-tcp": "0.0.35",
     "core-js": "^2.5.4",
     "grunt-sass": "^3.1.0",
+    "ngx-json-viewer": "^2.4.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "~6.4.0",
     "zone.js": "^0.9.1"
