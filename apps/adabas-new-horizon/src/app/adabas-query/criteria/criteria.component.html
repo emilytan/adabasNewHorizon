@@ -12,7 +12,11 @@
       <div class="card-block">
         <ng-template [ngIf]="int_fileSelected" [ngIfElse]="selectFileMessage">
           <div class="card-text">
-            <form class="clr-form clr-form-compact" [formGroup]="criteriaForm">
+            <form
+              class="clr-form clr-form-compact"
+              [formGroup]="criteriaForm"
+              (ngSubmit)="submitCriteria()"
+            >
               <div class="clr-form-control clr-row">
                 <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                   <input
@@ -166,6 +170,32 @@
                   </button>
                 </div>
               </div>
+              <div class="clr-form-control clr-row">
+                <div class="clr-control-wrapper clr-col-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="criteriaConfirm"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+              <ng-template [ngIf]="criteriaConfirm">
+                <div class="clr-form-control clr-row">
+                  <div class="clr-col-10">
+                    <span class="label label-info">Confirmed! </span>
+                    <button
+                      type="button"
+                      class="btn btn-link btn-icon"
+                      (click)="editCriteria()"
+                      aria-label="home"
+                    >
+                      <clr-icon shape="pencil" class="is-solid"></clr-icon>
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
             </form>
           </div>
         </ng-template>
