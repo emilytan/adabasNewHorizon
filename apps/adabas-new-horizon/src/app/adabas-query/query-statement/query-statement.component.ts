@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ada-new-horizon-query-statement',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./query-statement.component.scss']
 })
 export class QueryStatementComponent implements OnInit {
+  @Input('fileSelected') fileSelected;
+  @Input('fileSelection') fileSelection;
 
   constructor() { }
 

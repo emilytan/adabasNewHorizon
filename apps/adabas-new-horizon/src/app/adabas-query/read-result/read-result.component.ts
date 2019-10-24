@@ -1,22 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { sampleResult } from './sample-result';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
 
 @Component({
   selector: 'ada-new-horizon-read-result',
   templateUrl: './read-result.component.html',
   styleUrls: ['./read-result.component.scss']
 })
-export class ReadResultComponent implements OnInit {
-  allData = { data: sampleResult, keys: [] }
+export class ReadResultComponent implements OnInit, OnChanges {
+  @Input('readResult') readResult;
+  allData = { data: [], keys: [] };
   displayData = new Array();
   pageSize = 10;
   pagination;
   paginationEnabled = true;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.allData);
-    console.log('keys', Object.keys(this.allData.data[0]));
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.allData.data = this.readResult;
     this.sanatizeData();
     this.populateDisplay(0, 19);
   }
@@ -29,7 +36,7 @@ export class ReadResultComponent implements OnInit {
 
   populateDisplay(from: number, to: number) {
     this.displayData = new Array();
-    for(let i = from; i <= to; i++) {
+    for (let i = from; i <= to; i++) {
       this.displayData.push(this.allData.data[i]);
     }
   }
