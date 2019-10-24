@@ -25,9 +25,9 @@ export class ReadResultComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.showTable = false;
-    if (this.readResult.length > 0) {
+    if (changes.readResult.currentValue.length > 0) {
       this.showTable = true;
-      this.allData.data = this.readResult;
+      this.allData.data = changes.readResult.currentValue;
       this.sanatizeData();
       this.populateDisplay(0, 19);
     }
