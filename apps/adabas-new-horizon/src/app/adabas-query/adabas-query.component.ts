@@ -7,15 +7,18 @@ import { DbFileSelect } from './model/dbFileSelect.model';
   styleUrls: ['./adabas-query.component.scss']
 })
 export class AdabasQueryComponent implements OnInit {
-
   selectedDBFile: DbFileSelect;
-  constructor() { }
+  fileSelected = false;
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   eventDbFileSelect(event: DbFileSelect) {
     this.selectedDBFile = new DbFileSelect(event);
   }
 
+  eventDbFileSelected(event: boolean) {
+    this.selectedDBFile = new DbFileSelect(event);
+    this.fileSelected = event;
+  }
 }
