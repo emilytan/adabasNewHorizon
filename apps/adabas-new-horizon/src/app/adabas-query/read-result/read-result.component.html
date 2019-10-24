@@ -1,15 +1,40 @@
 <h2>Query Result</h2>
-<clr-datagrid>
-  <ng-container *ngFor="let key of keys">
+<clr-datagrid (clrDgRefresh)="refresh($event)">
+  <ng-container *ngFor="let key of allData.keys">
     <clr-dg-column>{{ key }}</clr-dg-column>
   </ng-container>
-  <ng-container *ngFor="let row of result">
+  <ng-container *ngFor="let row of displayData">
     <clr-dg-row>
-      <ng-container *ngFor="let key of keys">
+      <ng-container *ngFor="let key of allData.keys">
         <clr-dg-cell>{{ row[key] }}</clr-dg-cell>
       </ng-container>
     </clr-dg-row>
   </ng-container>
 
-  <clr-dg-footer>{{ result.length }} rows</clr-dg-footer>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="pageSize">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"
+        >records per page</clr-dg-page-size
+      >
+      <div class="pagination-list">
+        <button
+          type="button"
+          class="pagination-previous"
+          (click)="pagination.currentPage = pagination.currentPage - 1"
+        >
+          <clr-icon shape="angle left"></clr-icon>
+        </button>
+        <span>{{ pagination.currentPage }}</span>
+        <button
+          type="button"
+          class="pagination-next"
+          (click)="pagination.currentPage = pagination.currentPage + 1"
+        >
+          <clr-icon shape="angle right"></clr-icon>
+        </button>
+        {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+        {{ allData.data.length }} records
+      </div>
+    </clr-dg-pagination>
+  </clr-dg-footer>
 </clr-datagrid>

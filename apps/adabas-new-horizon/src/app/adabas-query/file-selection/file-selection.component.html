@@ -1,29 +1,117 @@
-<h2>File Selection</h2>
-<form [formGroup]="fileSelectForm" (ngSubmit)="fileSelect(fileSelectForm.value)">
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Host</label>
-        <div class="col-sm-6">
-            <input type="text" formControlName="host" maxlength="5" name="host" id="host">
-        </div>       
+<div class="clr-row">
+  <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        File Selection
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <form
+            class="clr-form clr-form-compact"
+            clrForm
+            [formGroup]="fileSelectForm"
+            (ngSubmit)="fileSelect(fileSelectForm.value)"
+          >
+            <div class="clr-form-control clr-row">
+              <div class="clr-input-wrapper clr-col-2">
+                <label for="example" class="clr-control-label">Host</label>
+              </div>
+              <div class="clr-control-container clr-col-4">
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    id="host"
+                    formControlName="host"
+                    placeholder="Host"
+                    class="clr-input"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="clr-form-control clr-row">
+              <div class="clr-input-wrapper clr-col-2">
+                <label for="example" class="clr-control-label">Port</label>
+              </div>
+              <div class="clr-control-container clr-col-4">
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    id="host"
+                    formControlName="port"
+                    placeholder="Port"
+                    class="clr-input"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="clr-form-control clr-row">
+              <div class="clr-input-wrapper clr-col-2">
+                <label for="example" class="clr-control-label"
+                  >File Number</label
+                >
+              </div>
+              <div class="clr-control-container clr-col-4">
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    id="host"
+                    formControlName="fnr"
+                    placeholder="File Number"
+                    class="clr-input"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="clr-form-control clr-row">
+              <div class="clr-input-wrapper clr-col-2">
+                <label for="example" class="clr-control-label">Function</label>
+              </div>
+              <div class="clr-control-container clr-col-4">
+                <div class="clr-input-wrapper">
+                  <div class="clr-select-wrapper">
+                    <select
+                      name="function"
+                      formControlName="ddlFunction"
+                      class="clr-select"
+                    >
+                      <option
+                        *ngFor="let func of function"
+                        [ngValue]="func.name"
+                        >{{ func.name }}</option
+                      >
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clr-form-control clr-row">
+              <div class="clr-col-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="fileSelected"
+                >
+                  Select
+                </button>
+              </div>
+              <div class="clr-col-10">
+                <ng-container *ngIf="fileSelected">
+                  <span class="label label-info"
+                    >Selected: {{ selectedChoice.host }}:{{
+                      selectedChoice.port
+                    }}({{ selectedChoice.fnr }}) [{{
+                      selectedChoice.ddlFunction
+                    }}]</span
+                  >
+                  <button type="button" class="btn btn-icon" (click)="editSelection()" aria-label="home">
+                    <clr-icon shape="pencil" class="is-solid"></clr-icon>
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Port</label>
-        <div class="col-sm-6">
-            <input type="text" formControlName="port" name="port" id="port">
-        </div>  
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">File Number</label>
-            <div class="col-sm-6">
-                <input type="text" formControlName="fnr" name="fnr" id="fnr">
-            </div>  
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Function</label>
-        <select [(ngModel)]="selectedFunction" formControlName="ddlFunction" (change)="onChange($event)">
-            <option *ngFor="let func of function" [ngValue]="func">{{func.name}}</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Select</button>
-</form>
-
+  </div>
+</div>
