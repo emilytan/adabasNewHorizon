@@ -143,6 +143,7 @@
                         id="select-adamap"
                         class="clr-select"
                         formControlName="adabasMap"
+                        (click)="getBrowseList()"
                       >
                         <option value="1none">None</option>
                         <option
@@ -158,10 +159,13 @@
                   <button
                     class="btn btn-link"
                     (click)="readFile(criteriaForm.value)"
+                    [disabled]="criteriaForm.value.adabasMap === 'none'"
                   >
                     FILE CONTENT
                   </button>
-                  <button class="btn btn-link" (click)="createMapPopUp()">
+                  <button class="btn btn-link" 
+                  (click)="createMapPopUp()"
+                  [disabled]="!fileSelected">
                     CREATE ADABAS MAP
                   </button>
                 </div>
@@ -229,40 +233,40 @@
   <clr-modal [(clrModalOpen)]="createMapDialog">
     <h3 class="modal-title">Create Adabas Map</h3>
     <div class="modal-body">
+      <div class="clr-form-control clr-row">
+        <table class="table table-noborder">
+          <thead>
+            <tr>
+              <th class="right"></th>
+              <th>Short Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Long Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of fdtList; let i = index">
+              <td class="right">
+                <input type="checkbox" clrCheckbox [(ngModel)]="list.state" />
+              </td>
+              <td>{{ list.shortName }}</td>
+              <td>{{ list.type }}</td>
+              <td>{{ list.size }}</td>
+              <td>
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    placeholder="Long Name"
+                    [(ngModel)]="list.longName"
+                    class="clr-input"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
-        <div class="clr-form-control clr-row">
-          <table class="table table-noborder">
-            <thead>
-              <tr>
-                <th class="right"></th>
-                <th>Short Name</th>
-                <th>Type</th>
-                <th>Size</th>
-                <th>Long Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let list of fdtList; let i = index">
-                <td class="right">
-                  <input type="checkbox" clrCheckbox />
-                </td>
-                <td for="createMap-checkbox">{{ list.name }}</td>
-                <td>{{ list.format }}</td>
-                <td>{{ list.length }}</td>
-                <td>
-                  <div class="clr-input-wrapper">
-                    <input
-                      type="text"
-                      placeholder="Long Name"
-                      class="clr-input"
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="clr-form-control clr-row">
           <div class="clr-input-wrapper clr-col-2">
             <label for="example" class="clr-control-label">File Name</label>
@@ -274,6 +278,7 @@
                 id="fileName"
                 formControlName="textfileName"
                 placeholder="File Name"
+                formControlName="fileName"
                 class="clr-input"
               />
             </div>
