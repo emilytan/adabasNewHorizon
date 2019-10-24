@@ -163,13 +163,16 @@
                   >
                     FILE CONTENT
                   </button>
-                  <button class="btn btn-link" 
-                  (click)="createMapPopUp()"
-                  [disabled]="!fileSelected">
-                    CREATE ADABAS MAP
-                  </button>
                 </div>
               </div>
+              <button
+                class="btn btn-link"
+                (click)="createMapPopUp()"
+                [disabled]="!fileSelected"
+              >
+                <clr-icon shape="plus-circle"></clr-icon>
+                CREATE ADABAS MAP
+              </button>
               <div class="clr-form-control clr-row">
                 <div class="clr-control-wrapper clr-col-2">
                   <button
