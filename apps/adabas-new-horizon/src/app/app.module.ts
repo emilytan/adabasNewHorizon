@@ -13,6 +13,7 @@ import {
   MdcCheckboxModule,
 } from '@angular-mdc/web';
 import { ClarityModule } from '@clr/angular';
+import { AdabasSqlComponent } from './adabas-sql/adabas-sql.component';
 
 const appRoutes: Routes = [
   // path = '/adabas-query'
@@ -23,13 +24,15 @@ const appRoutes: Routes = [
         m => m.AdabasQueryModule
       )
   },
+  { path: 'sql', component: AdabasSqlComponent, pathMatch: 'full' },
   // path = '/'
   { path: '', redirectTo: '/adabas-query', pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdabasSqlComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -48,4 +51,4 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -65,10 +65,17 @@ export class SqlController {
                 }
                 case 'UPDATE': {
                     const file = Number(query.substring(6).split(' SET ')[0]);
-                    const value = query.substring(6).split(' SET ')[1].split(' WHERE ')[0].replace(/^[ \t]+/gm, '').replace(/[ \t\n\r]+$/gm, '');
+                    const values = query.substring(6).split(' SET ')[1].split(' WHERE ')[0].replace(/^[ \t]+/gm, '').replace(/[ \t\n\r]+$/gm, '').split(',');
                     const criteria = query.split(' WHERE ')[1].replace(/^[ \t]+/gm, '').replace(/[ \t\n\r]+$/gm, '')
-                    // const obj = JSON.parse('{"' + value.split('=')[0] + '":"' + value.split('=')[1] + '"}');
-                    const obj = JSON.parse(value);
+                    let obj = {};
+                    values.forEach(v => {
+                        Object.assign(obj, JSON.parse('{"' + v.split('=')[0].replace(' ', '') + '":"' + v.split('=')[1] + '"}'));
+                    })
+
+                    console.log(file, values, criteria);
+                    // const obj = JSON.parse(value);
+                    console.log(file, values, criteria);
+                    console.log('check obj', obj);
                     if (body.map) {
                         const adaMap = parseAdaMap(body.map, file);
                         callData = {
@@ -89,16 +96,8 @@ export class SqlController {
                 case 'INSERT': {
                     const file = Number(query.substring(11).split(' VALUES ')[0]);
                     const value = query.substring(11).split(' VALUES ')[1].replace(/^[ \t]+/gm, '').replace(/[ \t\n\r]+$/gm, '');
-                    const values = query.substring(11).split(' VALUES ')[1].replace(/^[ \t]+/gm, '').replace(/[ \t\n\r]+$/gm, '').split(',');
-                    let obj = {};
-                    values.forEach(v => {
-                        Object.assign(obj, JSON.parse('{"' + v.split('=')[0]  + '":"' + v.split('=')[1] + '"}'));
-                        console.log(v);
-                    })
-                    console.log('v',values);
-                    let a = '{' + values + '}';
-                    console.log(a);
-                    // const obj = JSON.parse(a);
+
+                    const obj = JSON.parse(value);
                     console.log(file, value, obj);
                     if (body.map) {
                         const adaMap = parseAdaMap(body.map, file);
