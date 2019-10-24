@@ -23,6 +23,7 @@ export class CriteriaComponent implements OnInit, OnChanges {
   @Input('fileSelection') fileSelection: DbFileSelect;
   int_fileSelected;
   int_fileSelection: DbFileSelect;
+  criteriaConfirm = false;
   browseList: string[];
   criteriaForm = new FormGroup({
     textfilter: new FormControl('', null),
@@ -110,5 +111,13 @@ export class CriteriaComponent implements OnInit, OnChanges {
       .subscribe(response => {
         console.log('write response', response);
       });
+  }
+
+  submitCriteria(criteria) {
+    this.criteriaConfirm = true;
+  }
+
+  editCriteria() {
+    this.criteriaConfirm = false;
   }
 }
