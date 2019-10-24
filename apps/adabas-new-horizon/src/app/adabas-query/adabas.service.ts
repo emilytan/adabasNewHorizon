@@ -84,7 +84,7 @@ export class AdabasService {
   }
 
   writeFileService(fileName: string, fileContent: string) {
-    const postBody = JSON.stringify({ file: fileName, content: fileContent});
+    const postBody = JSON.stringify({ file: fileName, content: fileContent });
     // console.log('write body data :', postBody);
 
     return this.postRest('fileio/writefile', postBody).pipe(
@@ -107,7 +107,7 @@ export class AdabasService {
         return jsonResponse;
       }),
       catchError(err => {
-        return err;
+        throw err;
       })
     );
   }
