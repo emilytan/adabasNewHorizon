@@ -2,7 +2,12 @@
   <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
     <div class="card">
       <div class="card-header">
-        READ Criteria
+        Step 2 - Criteria
+        <ng-container *ngIf="int_fileSelected">
+          <span class="label label-info"
+            >{{ int_fileSelection ? int_fileSelection.ddlFunction : '' }}
+          </span>
+        </ng-container>
       </div>
       <div class="card-block">
         <div class="card-text">
@@ -83,7 +88,7 @@
                 >
                   FILE CONTENT
                 </button>
-                <button class="btn btn-link" (click)="writeFile()">
+                <button class="btn btn-link" (click)="createMapPopUp()">
                   CREATE ADABAS MAP
                 </button>
               </div>
@@ -121,20 +126,36 @@
     <div class="modal-body">
       <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
         <div class="clr-form-control clr-row">
-          <div class="clr-input-wrapper clr-col-2">
-            <label for="example" class="clr-control-label">Adabas Map</label>
-          </div>
-          <div class="clr-control-container clr-col-4">
-            <div class="clr-input-wrapper">
-              <input
-                type="text"
-                id="adabasMap"
-                formControlName="adabasMap"
-                placeholder="Adabas Map"
-                class="clr-input"
-              />
-            </div>
-          </div>
+          <table class="table table-noborder">
+            <thead>
+              <tr>
+                <th class="right"></th>
+                <th>Short Name</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Long Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let list of fdtList; let i = index">
+                <td class="right">
+                  <input type="checkbox" clrCheckbox />
+                </td>
+                <td for="createMap-checkbox">{{ list.name }}</td>
+                <td>{{ list.format }}</td>
+                <td>{{ list.length }}</td>
+                <td>
+                  <div class="clr-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="Long Name"
+                      class="clr-input"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="clr-form-control clr-row">
@@ -156,7 +177,11 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="writeFile()">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="writeFile(createMapForm)"
+      >
         SAVE
       </button>
       <button

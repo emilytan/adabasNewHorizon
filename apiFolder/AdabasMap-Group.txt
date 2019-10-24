@@ -1,0 +1,24 @@
+{
+    "map": [
+        {
+            "type": "ALPHA",
+            "shortname": "AA",
+            "longname": "testAA",
+            "size": "8"
+        },
+        {
+            "type": "GROUP",
+            "shortname": "AB",
+            "longname": "testAB",
+            "child": [
+                {
+                    "type": "ALPHA",
+                    "shortname": "AC",
+                    "longname": "testAC",
+                    "size": 20
+                }
+            ]
+        }
+    ]
+}  
+ 
