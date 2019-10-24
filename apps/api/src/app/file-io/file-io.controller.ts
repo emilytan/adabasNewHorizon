@@ -15,7 +15,7 @@ export class FileIoController {
             console.error(err)
         }
     }
-    @Get('readfile')
+    @Post('readfile')
     async getfile(@Body() body): Promise<any> {
         try {
             return readFileSync(baseFolder + body.file, 'utf8');
@@ -25,7 +25,7 @@ export class FileIoController {
         }
     }
 
-    @Get('browsefile')
+    @Post('browsefile')
     async getbrowse(@Body() body): Promise<any> {
         try {
             const selectedpath = body.path || './';
