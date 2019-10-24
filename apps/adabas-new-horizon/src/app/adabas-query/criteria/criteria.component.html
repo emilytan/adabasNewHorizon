@@ -15,7 +15,7 @@
             <form
               class="clr-form clr-form-compact"
               [formGroup]="criteriaForm"
-              (ngSubmit)="submitCriteria()"
+              (ngSubmit)="submitCriteria(criteriaForm.value)"
             >
               <div class="clr-form-control clr-row">
                 <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
