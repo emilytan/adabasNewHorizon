@@ -27,7 +27,7 @@ export class AdabasService {
     );
   }
 
-  postRest(resturl: string, data: string): any {
+  postRest(resturl: string, data: any): any {
     const url = 'http://localhost:3333/api/' + resturl;
     console.log('url', url);
     const httpOptions = {
@@ -61,7 +61,7 @@ export class AdabasService {
     const postBody = JSON.stringify({ file: fileName });
     return this.postRest('fileio/readfile', postBody.toString()).pipe(
       map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
+        // console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
       catchError(err => {
@@ -74,7 +74,7 @@ export class AdabasService {
     const url = host + '/' + port + '/fdt/fileid/' + fileId;
     return this.getRest(url).pipe(
       map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
+        // console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
       catchError(err => {
@@ -84,15 +84,12 @@ export class AdabasService {
   }
 
   writeFileService(fileName: string, fileContent: string) {
-    // const fileName = 'test2.txt';
-    // const fileContent =
-    //   '{"map": [{"type": "ALPHA","shortname": "AA","longname": "testAA","size": "8"},{"type": "GROUP","shortname": "AB","longname": "testAB","child": [{"type": "ALPHA","shortname": "AC","longname": "testAC","size": 20}]}]}';
-    const postBody = JSON.stringify({ file: fileName, content: fileContent.toString() });
-    console.log('write body data :', postBody);
+    const postBody = JSON.stringify({ file: fileName, content: fileContent});
+    // console.log('write body data :', postBody);
 
     return this.postRest('fileio/writefile', postBody).pipe(
       map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
+        // console.log('jsonResponse', jsonResponse);
         return jsonResponse;
       }),
       catchError(err => {

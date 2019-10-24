@@ -3,16 +3,20 @@
     <div class="card">
       <div class="card-header">
         Step 2 - Criteria
-        <ng-container *ngIf="int_fileSelected">
+        <ng-template [ngIf]="int_fileSelected">
           <span class="label label-info"
             >{{ int_fileSelection ? int_fileSelection.ddlFunction : '' }}
           </span>
-        </ng-container>
+        </ng-template>
       </div>
       <div class="card-block">
         <ng-template [ngIf]="int_fileSelected" [ngIfElse]="selectFileMessage">
           <div class="card-text">
-            <form class="clr-form clr-form-compact" [formGroup]="criteriaForm">
+            <form
+              class="clr-form clr-form-compact"
+              [formGroup]="criteriaForm"
+              (ngSubmit)="submitCriteria()"
+            >
               <div class="clr-form-control clr-row">
                 <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                   <input
@@ -30,15 +34,15 @@
                   <div class="clr-input-wrapper">
                     <input
                       type="text"
-                      id="text-filter"
+                      id="textfilter"
                       placeholder="Filter Data"
                       class="clr-input"
-                      formControlName="text-filter"
+                      formControlName="textfilter"
                     />
                   </div>
                 </div>
               </div>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'UPDATE'">
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'UPDATE'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -56,16 +60,16 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-set"
+                        id="textset"
                         placeholder="Set"
                         class="clr-input"
-                        formControlName="text-set"
+                        formControlName="textset"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'CREATE'">
+              </ng-template>
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'CREATE'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -83,16 +87,16 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-value"
+                        id="textvalue"
                         placeholder="Value"
                         class="clr-input"
-                        formControlName="text-value"
+                        formControlName="textvalue"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'READ'">
+              </ng-template>
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'READ'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -110,15 +114,15 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-isn"
+                        id="textisn"
                         placeholder="ISN Number"
                         class="clr-input"
-                        formControlName="isn"
+                        formControlName="textisn"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
+              </ng-template>
               <div class="clr-form-control clr-row">
                 <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                   <input
@@ -139,6 +143,7 @@
                         id="select-adamap"
                         class="clr-select"
                         formControlName="adabasMap"
+                        (click)="getBrowseList()"
                       >
                         <option value="1none">None</option>
                         <option
@@ -154,14 +159,43 @@
                   <button
                     class="btn btn-link"
                     (click)="readFile(criteriaForm.value)"
+                    [disabled]="criteriaForm.value.adabasMap === 'none'"
                   >
                     FILE CONTENT
                   </button>
-                  <button class="btn btn-link" (click)="createMapPopUp()">
+                  <button class="btn btn-link" 
+                  (click)="createMapPopUp()"
+                  [disabled]="!fileSelected">
                     CREATE ADABAS MAP
                   </button>
                 </div>
               </div>
+              <div class="clr-form-control clr-row">
+                <div class="clr-control-wrapper clr-col-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="criteriaConfirm"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+              <ng-template [ngIf]="criteriaConfirm">
+                <div class="clr-form-control clr-row">
+                  <div class="clr-col-10">
+                    <span class="label label-info">Confirmed! </span>
+                    <button
+                      type="button"
+                      class="btn btn-link btn-icon"
+                      (click)="editCriteria()"
+                      aria-label="home"
+                    >
+                      <clr-icon shape="pencil" class="is-solid"></clr-icon>
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
             </form>
           </div>
         </ng-template>
@@ -199,40 +233,40 @@
   <clr-modal [(clrModalOpen)]="createMapDialog">
     <h3 class="modal-title">Create Adabas Map</h3>
     <div class="modal-body">
+      <div class="clr-form-control clr-row">
+        <table class="table table-noborder">
+          <thead>
+            <tr>
+              <th class="right"></th>
+              <th>Short Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Long Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let list of fdtList; let i = index">
+              <td class="right" style="padding-left: 25px">
+                <input type="checkbox" clrCheckbox [(ngModel)]="list.state" />
+              </td>
+              <td>{{ list.shortName }}</td>
+              <td>{{ list.type }}</td>
+              <td>{{ list.size }}</td>
+              <td>
+                <div class="clr-input-wrapper">
+                  <input
+                    type="text"
+                    placeholder="Long Name"
+                    [(ngModel)]="list.longName"
+                    class="clr-input"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
-        <div class="clr-form-control clr-row">
-          <table class="table table-noborder">
-            <thead>
-              <tr>
-                <th class="right"></th>
-                <th>Short Name</th>
-                <th>Type</th>
-                <th>Size</th>
-                <th>Long Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let list of fdtList; let i = index">
-                <td class="right">
-                  <input type="checkbox" clrCheckbox />
-                </td>
-                <td for="createMap-checkbox">{{ list.name }}</td>
-                <td>{{ list.format }}</td>
-                <td>{{ list.length }}</td>
-                <td>
-                  <div class="clr-input-wrapper">
-                    <input
-                      type="text"
-                      placeholder="Long Name"
-                      class="clr-input"
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div class="clr-form-control clr-row">
           <div class="clr-input-wrapper clr-col-2">
             <label for="example" class="clr-control-label">File Name</label>
@@ -242,8 +276,9 @@
               <input
                 type="text"
                 id="fileName"
-                formControlName="fileName"
+                formControlName="textfileName"
                 placeholder="File Name"
+                formControlName="fileName"
                 class="clr-input"
               />
             </div>
