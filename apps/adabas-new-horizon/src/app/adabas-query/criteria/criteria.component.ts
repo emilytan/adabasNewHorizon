@@ -1,17 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { DbFileSelect } from '../model/dbFileSelect.model';
 
 @Component({
   selector: 'ada-new-horizon-criteria',
   templateUrl: './criteria.component.html',
   styleUrls: ['./criteria.component.scss']
 })
-export class CriteriaComponent implements OnInit {
+export class CriteriaComponent implements OnInit, OnChanges {
   @Input('fileSelected') fileSelected;
-  @Input('fileSelection') fileSelection;
+  @Input('fileSelection') fileSelection: DbFileSelect;
+  int_fileSelected;
+  int_fileSelection: DbFileSelect;
   browseList: string[];
   criteriaForm = new FormGroup({
     isn: new FormControl('', null),
@@ -36,6 +45,16 @@ export class CriteriaComponent implements OnInit {
       this.browseList = response;
       console.log('this.browseList', this.browseList);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    if (changes.hasOwnProperty('fileSelected')) {
+      this.int_fileSelected = changes.fileSelected.currentValue;
+    }
+    if (changes.hasOwnProperty('fileSelected')) {
+      this.int_fileSelection = changes.fileSelection.currentValue;
+    }
   }
 
   readFile(criteriaForm) {
