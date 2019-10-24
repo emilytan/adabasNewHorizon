@@ -7,5 +7,10 @@
   [fileSelected]="fileSelected"
   [fileSelection]="selectedDBFile"
 ></ada-new-horizon-criteria>
-<ada-new-horizon-query-statement></ada-new-horizon-query-statement>
-<ada-new-horizon-read-result></ada-new-horizon-read-result>
+<ada-new-horizon-query-statement
+  [fileSelected]="fileSelected"
+  [fileSelection]="selectedDBFile"
+></ada-new-horizon-query-statement>
+<ada-new-horizon-read-result
+  [readResult]="sampleResult"
+></ada-new-horizon-read-result>
