@@ -7,11 +7,13 @@
   [fileSelected]="fileSelected"
   [fileSelection]="selectedDBFile"
   (criteriaSelected)="eventCriteriaSelect($event)"
+  (criteriaConfirmation)="eventCriteriaConfirmation($event)"
 ></ada-new-horizon-criteria>
 <ada-new-horizon-query-statement
   [fileSelected]="fileSelected"
   [fileSelection]="selectedDBFile"
   [criteriaInput]="criteriaInput"
+  [criteriaConfirmation]="criteriaConfirmation"
 ></ada-new-horizon-query-statement>
 <ada-new-horizon-read-result
   [readResult]="sampleResult"

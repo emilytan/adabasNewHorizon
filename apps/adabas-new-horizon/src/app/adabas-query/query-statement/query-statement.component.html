@@ -2,18 +2,31 @@
   <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
     <div class="card">
       <div class="card-header">
-        Query Statement
+        Step 3 - Query Statement Builder
       </div>
       <div class="card-block">
         <div class="card-text">
-         < SELECT * FROM File(11) WHERE LASTNAME = 'Smith'>
-         <span>{{ criteriaInput }}</span>
+          <ng-template [ngIf]="fileSelected && criteriaConfirmation">
+            <div class="clr-row">
+              <div class="clr-col-12">
+                {{ sqlStatement }}
+              </div>
+            </div>
+            <div class="clr-row">
+              <div class="clr-col-12">
+                <button class="btn btn-outline">Execute</button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template [ngIf]="!fileSelected && !criteriaConfirmation">
+            <div class="clr-row">
+              <div class="clr-col-12">
+                Awaiting input from Step 1 and Step 2
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
-      <!-- <div class="card-footer">
-        <button class="btn btn-sm btn-link">Footer Action 1</button>
-        <button class="btn btn-sm btn-link">Footer Action 2</button>
-      </div> -->
     </div>
   </div>
 </div>

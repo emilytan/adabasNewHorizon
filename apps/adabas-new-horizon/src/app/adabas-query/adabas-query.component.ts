@@ -12,6 +12,8 @@ export class AdabasQueryComponent implements OnInit {
   fileSelected = false;
   sampleResult;
   criteriaInput;
+  criteriaConfirmation;
+
   constructor() {}
 
   ngOnInit() {
@@ -29,5 +31,9 @@ export class AdabasQueryComponent implements OnInit {
 
   eventCriteriaSelect(event: any) {
     this.criteriaInput = event;
+  }
+
+  eventCriteriaConfirmation(event: boolean) {
+    this.criteriaConfirmation = event;
   }
 }

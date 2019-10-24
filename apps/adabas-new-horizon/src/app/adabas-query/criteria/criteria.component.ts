@@ -24,13 +24,12 @@ export class CriteriaComponent implements OnInit, OnChanges {
   @Input('fileSelected') fileSelected;
   @Input('fileSelection') fileSelection: DbFileSelect;
   @Output('criteriaSelected') criteriaSelected = new EventEmitter();
+  @Output('criteriaConfirmation') criteriaConfirmation = new EventEmitter();
   int_fileSelected;
   int_fileSelection: DbFileSelect;
   criteriaConfirm = false;
   browseList: string[];
   criteriaForm = new FormGroup({
-    isn: new FormControl('', null),
-    filter: new FormControl('', null),
     adabasMap: new FormControl('none', null),
     textfilter: new FormControl('', null),
     textset: new FormControl('', null),
@@ -172,9 +171,11 @@ export class CriteriaComponent implements OnInit, OnChanges {
   submitCriteria(criteria) {
     this.criteriaConfirm = true;
     this.criteriaSelected.emit(criteria);
+    this.criteriaConfirmation.emit(this.criteriaConfirm);
   }
 
   editCriteria() {
     this.criteriaConfirm = false;
+    this.criteriaConfirmation.emit(this.criteriaConfirm);
   }
 }
