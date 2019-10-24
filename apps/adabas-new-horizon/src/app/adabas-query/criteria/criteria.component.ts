@@ -18,42 +18,45 @@ export class CriteriaComponent implements OnInit {
     adabasMap: new FormControl('', null),
   });
 
+  fileContentHeader: string;
+  fileContentDialog: boolean;
+  fileContentData: any;
+
+  createMapDialog: boolean;
+  createMapForm = new FormGroup({
+    fileName: new FormControl('', null),
+    adabasMap: new FormControl('', null),
+  });
+
   constructor(private adabasSvc: AdabasService) { }
 
   ngOnInit() {
-    this.getBrowseFile().subscribe(response => {
+    this.adabasSvc.getBrowseFileService().subscribe(response => {
       this.browseList = response;
       console.log('this.browseList', this.browseList);
-
     });
   }
 
-  getBrowseFile() {
-    return this.adabasSvc.getRest('fileio/browsefile').pipe(
-      map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
-        return jsonResponse;
-      }),
-      catchError((err) => {
-        return err;
-      })
-    );
+
+  readFile(criteriaForm){
+    this.fileContentDialog = true;
+    this.fileContentHeader = 'File Content of ' + criteriaForm.adabasMap;
+    this.adabasSvc.readFileService(criteriaForm.adabasMap).subscribe(response => {
+      this.fileContentData = response;
+      console.log('fileContentData', this.fileContentData);
+    });  
   }
 
-  readFile(criteriaForm) {
-    console.log('criteriaForm', criteriaForm);
-    const file = '{"file":"' + criteriaForm.adabasMap + '"}';
-    console.log('file:', file);
-    return this.adabasSvc.getRest('fileio/readfile').pipe(
-      map(jsonResponse => {
-        console.log('jsonResponse', jsonResponse);
-        return jsonResponse;
-      }),
-      catchError((err) => {
-        return err;
-      })
-    );
 
+
+  writeFile(){
+    this.createMapDialog = true;
+    this.adabasSvc.writeFileService().subscribe(response => {
+      console.log('write response', response);
+    });
   }
+
+  
+
 
 }

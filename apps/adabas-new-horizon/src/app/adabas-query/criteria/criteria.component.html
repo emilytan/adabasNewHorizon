@@ -15,12 +15,12 @@
                             </div>
                             <div class="clr-control-container clr-col-12 clr-col-md-10">
                                 <div class="clr-input-wrapper">
-                                    <input type="text" id="vertical-checkbox1" placeholder="isn number"
+                                    <input type="text" id="vertical-checkbox1" placeholder="ISN Number"
                                         class="clr-input" formControlName="isn">
                                 </div>
                             </div>
                         </div>
-                        <div class="clr-form-control clr-row">
+                        <!-- <div class="clr-form-control clr-row">
                             <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                                 <input type="checkbox" id="vertical-checkbox2" name="checkbox-full" value="filter"
                                     class="clr-checkbox">
@@ -28,11 +28,11 @@
                             </div>
                             <div class="clr-control-container clr-col-12 clr-col-md-10">
                                 <div class="clr-input-wrapper">
-                                    <input type="text" id="vertical-checkbox2" placeholder="filter data"
+                                    <input type="text" id="vertical-checkbox2" placeholder="Filter Data"
                                         class="clr-input" formControlName="filter">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="clr-form-control clr-row">
                             <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                                 <input type="checkbox" id="vertical-checkbox3" name="checkbox-full" value="adabasMap"
@@ -49,9 +49,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="clr-control-container clr-col-12 clr-col-md-2">
-                                <button class="btn btn-link" (click)="readFile(criteriaForm.value)">File
-                                    Content</button>
+                            <div class="clr-control-container clr-col-12 clr-col-md-6">
+                                <button class="btn btn-link" (click)="readFile(criteriaForm.value)">FILE
+                                    CONTENT</button>
+                                <button class="btn btn-link" (click)="writeFile()">CREATE ADABAS MAP</button>
                             </div>
                         </div>
                     </form>
@@ -59,4 +60,53 @@
             </div>
         </div>
     </div>
+</div>
+
+<!---------------------------------------- READ FILE CONTENT MODAL ---------------------------------------->
+<div *ngIf='fileContentDialog===true'>
+    <clr-modal [(clrModalOpen)]="fileContentDialog">
+        <h3 class="modal-title">{{fileContentHeader}}</h3>
+        <div class="modal-body">
+            <p>{{fileContentData}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="fileContentDialog=false">Ok</button>
+        </div>
+    </clr-modal>
+</div>
+
+<!---------------------------------------- CREATE MAP MODAL ---------------------------------------->
+<div *ngIf='createMapDialog===true'>
+    <clr-modal [(clrModalOpen)]="createMapDialog">
+        <h3 class="modal-title">Create Adabas Map</h3>
+        <div class="modal-body">
+            <form class="clr-form clr-form-compact" [formGroup]="createMapForm">
+                <div class="clr-form-control clr-row">
+                    <div class="clr-input-wrapper clr-col-2">
+                        <label for="example" class="clr-control-label">File Name</label>
+                    </div>
+                    <div class="clr-control-container clr-col-4">
+                        <div class="clr-input-wrapper">
+                            <input type="text" id="fileName" formControlName="fileName" placeholder="File Name" class="clr-input" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clr-form-control clr-row">
+                    <div class="clr-input-wrapper clr-col-2">
+                        <label for="example" class="clr-control-label">Adabas Map</label>
+                    </div>
+                    <div class="clr-control-container clr-col-4">
+                        <div class="clr-input-wrapper">
+                            <input type="text" id="adabasMap" formControlName="adabasMap" placeholder="Adabas Map" class="clr-input" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="writeFile()">SAVE</button>
+            <button type="button" class="btn btn-primary" (click)="createMapDialog=false">CANCEL</button>
+
+        </div>
+    </clr-modal>
 </div>
