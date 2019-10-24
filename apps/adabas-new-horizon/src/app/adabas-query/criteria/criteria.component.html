@@ -3,11 +3,11 @@
     <div class="card">
       <div class="card-header">
         Step 2 - Criteria
-        <ng-container *ngIf="int_fileSelected">
+        <ng-template [ngIf]="int_fileSelected">
           <span class="label label-info"
             >{{ int_fileSelection ? int_fileSelection.ddlFunction : '' }}
           </span>
-        </ng-container>
+        </ng-template>
       </div>
       <div class="card-block">
         <ng-template [ngIf]="int_fileSelected" [ngIfElse]="selectFileMessage">
@@ -30,15 +30,15 @@
                   <div class="clr-input-wrapper">
                     <input
                       type="text"
-                      id="text-filter"
+                      id="textfilter"
                       placeholder="Filter Data"
                       class="clr-input"
-                      formControlName="text-filter"
+                      formControlName="textfilter"
                     />
                   </div>
                 </div>
               </div>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'UPDATE'">
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'UPDATE'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -56,16 +56,16 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-set"
+                        id="textset"
                         placeholder="Set"
                         class="clr-input"
-                        formControlName="text-set"
+                        formControlName="textset"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'CREATE'">
+              </ng-template>
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'CREATE'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -83,16 +83,16 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-value"
+                        id="textvalue"
                         placeholder="Value"
                         class="clr-input"
-                        formControlName="text-value"
+                        formControlName="textvalue"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="int_fileSelection.ddlFunction === 'READ'">
+              </ng-template>
+              <ng-template [ngIf]="int_fileSelection.ddlFunction === 'READ'">
                 <div class="clr-form-control clr-row">
                   <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                     <input
@@ -110,15 +110,15 @@
                     <div class="clr-input-wrapper">
                       <input
                         type="text"
-                        id="text-isn"
+                        id="textisn"
                         placeholder="ISN Number"
                         class="clr-input"
-                        formControlName="isn"
+                        formControlName="textisn"
                       />
                     </div>
                   </div>
                 </div>
-              </ng-container>
+              </ng-template>
               <div class="clr-form-control clr-row">
                 <div class="clr-checkbox-wrapper clr-col-12 clr-col-md-2">
                   <input
@@ -242,7 +242,7 @@
               <input
                 type="text"
                 id="fileName"
-                formControlName="fileName"
+                formControlName="textfileName"
                 placeholder="File Name"
                 class="clr-input"
               />

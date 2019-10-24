@@ -4,7 +4,7 @@
       <div class="card-header">
         Step 1 - File Selection
       </div>
-      <ng-container *ngIf="!fileSelected">
+      <ng-template [ngIf]="!fileSelected">
         <div class="card-block">
           <div class="card-text">
             <form
@@ -101,8 +101,8 @@
             </form>
           </div>
         </div>
-      </ng-container>
-      <ng-container *ngIf="fileSelected">
+      </ng-template>
+      <ng-template [ngIf]="fileSelected">
         <div class="clr-col-row">
           <div class="clr-col-12">
             <ng-container *ngIf="fileSelected">
@@ -127,7 +127,7 @@
             </ng-container>
           </div>
         </div>
-      </ng-container>
+      </ng-template>
     </div>
   </div>
 </div>

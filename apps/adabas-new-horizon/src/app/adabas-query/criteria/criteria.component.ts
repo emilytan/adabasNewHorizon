@@ -3,7 +3,8 @@ import {
   OnInit,
   Input,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  ChangeDetectorRef
 } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { AdabasService } from '../adabas.service';
@@ -24,8 +25,10 @@ export class CriteriaComponent implements OnInit, OnChanges {
   int_fileSelection: DbFileSelect;
   browseList: string[];
   criteriaForm = new FormGroup({
-    isn: new FormControl('', null),
-    filter: new FormControl('', null),
+    textfilter: new FormControl('', null),
+    textset: new FormControl('', null),
+    textvalue: new FormControl('', null),
+    textisn: new FormControl('', null),
     adabasMap: new FormControl('', null)
   });
 
@@ -39,9 +42,12 @@ export class CriteriaComponent implements OnInit, OnChanges {
     adabasMap: new FormControl('', null)
   });
 
-  fdtList= new Array<FDT>();
+  fdtList = new Array<FDT>();
 
-  constructor(private adabasSvc: AdabasService) {}
+  constructor(
+    private cd: ChangeDetectorRef,
+    private adabasSvc: AdabasService
+  ) {}
 
   ngOnInit() {
     this.adabasSvc.getBrowseFileService().subscribe(response => {
@@ -58,6 +64,7 @@ export class CriteriaComponent implements OnInit, OnChanges {
     if (changes.hasOwnProperty('fileSelected')) {
       this.int_fileSelection = changes.fileSelection.currentValue;
     }
+    this.cd.detectChanges();
   }
 
   readFile(criteriaForm) {
@@ -74,28 +81,34 @@ export class CriteriaComponent implements OnInit, OnChanges {
 
   createMapPopUp() {
     this.createMapDialog = true;
-    if (this.fileSelected){
-      this.adabasSvc.readFDT(this.fileSelection.host, this.fileSelection.port, this.fileSelection.fnr).subscribe(response => {
-        console.log('readFDT response', response);
-        let fdt: FDT;
-        for (let i = 0; i < response.length; i++) {
-          fdt = {
-            name: response[i].name,
-            format: response[i].format,
-            length: response[i].length
-          };
-          this.fdtList.push(fdt);
-        }
-        console.log('fdtList', this.fdtList);
-      });
+    if (this.fileSelected) {
+      this.adabasSvc
+        .readFDT(
+          this.fileSelection.host,
+          this.fileSelection.port,
+          this.fileSelection.fnr
+        )
+        .subscribe(response => {
+          console.log('readFDT response', response);
+          let fdt: FDT;
+          for (let i = 0; i < response.length; i++) {
+            fdt = {
+              name: response[i].name,
+              format: response[i].format,
+              length: response[i].length
+            };
+            this.fdtList.push(fdt);
+          }
+          console.log('fdtList', this.fdtList);
+        });
     }
-
-   
   }
 
-  writeFile(createMapForm){
-    this.adabasSvc.writeFileService(createMapForm.fileName, createMapForm.adabasMap).subscribe(response => {
-      console.log('write response', response);
-    });
+  writeFile(createMapForm) {
+    this.adabasSvc
+      .writeFileService(createMapForm.fileName, createMapForm.adabasMap)
+      .subscribe(response => {
+        console.log('write response', response);
+      });
   }
 }
