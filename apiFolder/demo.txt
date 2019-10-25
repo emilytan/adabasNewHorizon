@@ -1,0 +1,1 @@
+{"map":[{"shortname":"AA","type":"ALPHA","size":20,"longname":"Name"},{"shortname":"AB","type":"ALPHA","size":8,"longname":"Age"},{"shortname":"AC","type":"ALPHA","size":8,"longname":"Bonus"},{"shortname":"AD","type":"ALPHA","size":8,"longname":"Salary"},{"shortname":"AE","type":"ALPHA","size":8,"longname":"Commission"}]}

@@ -7,7 +7,7 @@ import { AdabasService } from '../adabas-query/adabas.service';
   styleUrls: ['./adabas-sql.component.scss']
 })
 export class AdabasSqlComponent implements OnInit {
-  sql = 'SELect * FROM 11 WHERE AA=000095';
+  sql = 'SELect * FROM 20';
   result = null;
   msg = null;
   error = null;
