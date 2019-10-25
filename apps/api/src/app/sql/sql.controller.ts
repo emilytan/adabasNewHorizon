@@ -116,37 +116,43 @@ export class SqlController {
         }
         case 'UPDATE': {
           const file = Number(query.substring(6).split(' SET ')[0]);
-          const values = query
+          const value = query
             .substring(6)
             .split(' SET ')[1]
             .split(' WHERE ')[0]
             .replace(/^[ \t]+/gm, '')
-            .replace(/[ \t\n\r]+$/gm, '')
-            .split(',');
+            .replace(/[ \t\n\r]+$/gm, '');
+
           const criteria = query
             .split(' WHERE ')[1]
             .replace(/^[ \t]+/gm, '')
             .replace(/[ \t\n\r]+$/gm, '');
+
           let obj = {};
-          values.forEach(v => {
-            Object.assign(
-              obj,
-              JSON.parse(
-                '{"' +
-                  v
-                    .split('=')[0]
-                    .replace(' ', '')
-                    .replace(/^[ \t]+/gm, '')
-                    .replace(/[ \t\n\r]+$/gm, '') +
-                  '":"' +
-                  v
-                    .split('=')[1]
-                    .replace(/^[ \t]+/gm, '')
-                    .replace(/[ \t\n\r]+$/gm, '') +
-                  '"}'
-              )
-            );
-          });
+          if (value.substr(0, 1) === '{') {
+            obj = JSON.parse(value);
+          } else {
+            value.split(',').forEach(v => {
+              Object.assign(
+                obj,
+                JSON.parse(
+                  '{"' +
+                    v
+                      .split('=')[0]
+                      .replace(' ', '')
+                      .replace(/^[ \t]+/gm, '')
+                      .replace(/[ \t\n\r]+$/gm, '') +
+                    '":"' +
+                    v
+                      .split('=')[1]
+                      .replace(/^[ \t]+/gm, '')
+                      .replace(/[ \t\n\r]+$/gm, '') +
+                    '"}'
+                )
+              );
+            });
+          }
+
           if (body.map) {
             const adaMap = parseAdaMap(body.map, file);
             callData = {
