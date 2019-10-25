@@ -12,6 +12,8 @@ import { functionType } from '../model/function-type.model';
 import { CriteriaModel } from '../model/criteria.model';
 import { AdabasService } from '../adabas.service';
 import { RESTAdaMap } from '@ada-new-horizon/api-interfaces';
+import { ThrowStmt } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'ada-new-horizon-query-statement',
@@ -82,11 +84,38 @@ export class QueryStatementComponent implements OnInit, OnChanges {
     }
   }
 
-  buildDelete() {}
+  buildDelete() {
+    this.sqlStatement = 'DELETE ';
+    this.sqlStatement += ' FROM ' + this.fileSelection.fnr + ' ';
+    if (this.criteriaInput.textfilter !== '') {
+      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter + ' ';
+    }
+  }
 
-  buildUpdate() {}
+  buildUpdate() {
+    // this.sqlStatement = 'UPDATE ' + this.fileSelection.fnr;
+    let longnames = new Array<string>();
+    this.sqlStatement = 'UPDATE ';
+    if (this.adaMapContent.length > 0) {
+      longnames = this.getLongName();
+      this.sqlStatement += longnames.join(',');
+    } else {
+      this.sqlStatement += this.fileSelection.fnr;
+    }
+    if (this.criteriaInput.textset !== '' && this.criteriaInput.textfilter !== '') {
+      this.sqlStatement += ' SET ' + this.criteriaInput.textset + ' WHERE ' + this.criteriaInput.textfilter;
+    } 
+  }
 
-  buildCreate() {}
+  buildCreate() {
+    this.sqlStatement = 'INSERT INTO ' + this.fileSelection.fnr + ' ';
+    if (this.criteriaInput.textfilter !== '') {
+      this.sqlStatement += ' VALUES ' + this.criteriaInput.textfilter;
+    } else {
+      this.sqlStatement += ' VALUES ' + this.criteriaInput.textvalue;
+    }
+
+  }
 
   getLongName(): string[] {
     let longnames = new Array<string>();
