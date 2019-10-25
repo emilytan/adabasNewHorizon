@@ -1,0 +1,52 @@
+ {"map": [
+        {
+            "type": "ALPHA",
+            "shortname": "AA",
+            "longname": "Name",
+            "size": 20
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AB",
+            "longname": "Age",
+            "size": 8
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AC",
+            "longname": "Bonus",
+            "size": 8
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AD",
+            "longname": "Salary",
+            "size": 8
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AE",
+            "longname": "Commision",
+            "size": 8
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AF",
+            "longname": "Tax Number",
+            "size": 8
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AG",
+            "longname": "Position",
+            "size": 20
+        },
+		{
+            "type": "ALPHA",
+            "shortname": "AH",
+            "longname": "Department",
+            "size": 20
+        }
+		
+		
+    ]} 

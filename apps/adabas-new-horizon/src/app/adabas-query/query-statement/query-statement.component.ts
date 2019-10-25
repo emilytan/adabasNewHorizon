@@ -85,10 +85,10 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   }
 
   buildDelete() {
-    this.sqlStatement = 'DELETE ';
+    this.sqlStatement = 'DELETE';
     this.sqlStatement += ' FROM ' + this.fileSelection.fnr + ' ';
     if (this.criteriaInput.textfilter !== '') {
-      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter + ' ';
+      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter;
     }
   }
 
@@ -96,12 +96,7 @@ export class QueryStatementComponent implements OnInit, OnChanges {
     // this.sqlStatement = 'UPDATE ' + this.fileSelection.fnr;
     let longnames = new Array<string>();
     this.sqlStatement = 'UPDATE ';
-    if (this.adaMapContent.length > 0) {
-      longnames = this.getLongName();
-      this.sqlStatement += longnames.join(',');
-    } else {
       this.sqlStatement += this.fileSelection.fnr;
-    }
     if (this.criteriaInput.textset !== '' && this.criteriaInput.textfilter !== '') {
       this.sqlStatement += ' SET ' + this.criteriaInput.textset + ' WHERE ' + this.criteriaInput.textfilter;
     } 

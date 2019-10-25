@@ -64,7 +64,8 @@ export class AdabasQueryComponent implements OnInit {
               .toUpperCase() +
             'statement executed successfully, ISN ' +
             res +
-            ' updated';
+            ' ' +
+            this.selectedDBFile.ddlFunction;
         } else {
           this.msg = null;
           if (res instanceof Array) {
