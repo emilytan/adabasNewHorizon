@@ -76,9 +76,9 @@ export class QueryStatementComponent implements OnInit, OnChanges {
     }
     this.sqlStatement += ' FROM ' + this.fileSelection.fnr + ' ';
     if (this.criteriaInput.textisn !== '') {
-      this.sqlStatement += 'WHERE ISN = ' + this.criteriaInput.textisn + ' ';
+      this.sqlStatement += 'WHERE ISN=' + this.criteriaInput.textisn;
     } else if (this.criteriaInput.textfilter !== '') {
-      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter + ' ';
+      this.sqlStatement += 'WHERE ' + this.criteriaInput.textfilter;
     }
   }
 
@@ -91,11 +91,11 @@ export class QueryStatementComponent implements OnInit, OnChanges {
   getLongName(): string[] {
     let longnames = new Array<string>();
     this.adaMapContent.forEach(element => {
-      longnames.push(element['longName']);
+      longnames.push(element['longname']);
     });
     return longnames;
   }
   executeQuery() {
-    this.execute.emit(this.sqlStatement);
+    this.execute.emit({sqlStatement: this.sqlStatement, adaMapContent: this.adaMapContent});
   }
 }

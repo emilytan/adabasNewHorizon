@@ -16,6 +16,46 @@
   [criteriaConfirmation]="criteriaConfirmation"
   (execute)="eventExecuteSqlQuery($event)"
 ></ada-new-horizon-query-statement>
-<ada-new-horizon-read-result
+
+<div class="clr-row">
+  <div class="clr-col-lg-10 clr-col-md-12 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        Sql Result
+      </div>
+      <ng-container *ngIf="result !== null">
+        <ada-new-horizon-read-result
+          [readResult]="result"
+        ></ada-new-horizon-read-result>
+      </ng-container>
+      <ng-container *ngIf="msg !== null">
+        <div class="alert alert-success" role="alert">
+          <div class="alert-items">
+            <div class="alert-item static">
+              <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+              </div>
+              <span class="alert-text">{{ msg }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="error !== null">
+            <div class="alert alert-danger" role="alert">
+              <div class="alert-items">
+                <div class="alert-item static">
+                  <div class="alert-icon-wrapper">
+                    <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                  </div>
+                  <span class="alert-text">{{ error }}</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- <ada-new-horizon-read-result
   [readResult]="sampleResult"
-></ada-new-horizon-read-result>
+></ada-new-horizon-read-result> -->

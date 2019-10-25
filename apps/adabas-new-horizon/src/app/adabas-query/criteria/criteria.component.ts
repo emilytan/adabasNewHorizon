@@ -130,10 +130,10 @@ export class CriteriaComponent implements OnInit, OnChanges {
             let fdt: AdabasMap;
             fdt = {
               state: false,
-              shortName: response[i].name,
+              shortname: response[i].name,
               type: response[i].format,
               size: response[i].length,
-              longName: ''
+              longname: ''
             };
             this.fdtList.push(fdt);
           }
@@ -150,10 +150,10 @@ export class CriteriaComponent implements OnInit, OnChanges {
       if (this.fdtList[i].state) {
         let fdtMap: AdabasMap;
         fdtMap = {
-          shortName: this.fdtList[i].shortName,
+          shortname: this.fdtList[i].shortname,
           type: this.fdtList[i].type,
           size: this.fdtList[i].size,
-          longName: this.fdtList[i].longName
+          longname: this.fdtList[i].longname
         };
         fdtMapList.push(fdtMap);
       }

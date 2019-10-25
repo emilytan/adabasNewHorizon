@@ -12,17 +12,17 @@ export class FDT {
 
 export class AdabasMap {
   state?: boolean;
-  shortName: string;
+  shortname: string;
   type: string;
   size: number;
-  longName: string;
+  longname: string;
 
   constructor() {
     this.state = false;
-    this.shortName = '';
+    this.shortname = '';
     this.type = '';
     this.size = null;
-    this.longName = '';
+    this.longname = '';
   }
 }
 

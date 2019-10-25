@@ -98,9 +98,14 @@ export class AdabasService {
     );
   }
 
-  sql(host: string, port: number, sqlstring: string) {
+  sql(host: string, port: number, sqlstring: string, adaMap?) {
     const url = host + '/' + port + '/sql';
-    const postBody = JSON.stringify({ sql: sqlstring });
+    let postBody;
+    if (typeof adaMap !== 'undefined' && adaMap.length > 0) {
+      postBody = JSON.stringify({ sql: sqlstring, map: adaMap });
+    } else {
+      postBody = JSON.stringify({ sql: sqlstring });
+    }
     return this.postRest(url, postBody).pipe(
       map(jsonResponse => {
         console.log('jsonResponse', jsonResponse);
