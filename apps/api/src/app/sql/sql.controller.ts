@@ -61,8 +61,19 @@ export class SqlController {
               .split(' WHERE ')[1]
               .replace(/^[ \t]+/gm, '')
               .replace(/[ \t\n\r]+$/gm, '');
-            if (condition.split('=')[0].toLocaleUpperCase() === 'ISN') {
-              callData.isn = Number(condition.split('=')[1]);
+            if (
+              condition
+                .split('=')[0]
+                .replace(/^[ \t]+/gm, '')
+                .replace(/[ \t\n\r]+$/gm, '')
+                .toLocaleUpperCase() === 'ISN'
+            ) {
+              callData.isn = Number(
+                condition
+                  .split('=')[1]
+                  .replace(/^[ \t]+/gm, '')
+                  .replace(/[ \t\n\r]+$/gm, '')
+              );
             } else {
               callData.criteria = condition;
             }
@@ -122,9 +133,16 @@ export class SqlController {
               obj,
               JSON.parse(
                 '{"' +
-                  v.split('=')[0].replace(' ', '') +
+                  v
+                    .split('=')[0]
+                    .replace(' ', '')
+                    .replace(/^[ \t]+/gm, '')
+                    .replace(/[ \t\n\r]+$/gm, '') +
                   '":"' +
-                  v.split('=')[1] +
+                  v
+                    .split('=')[1]
+                    .replace(/^[ \t]+/gm, '')
+                    .replace(/[ \t\n\r]+$/gm, '') +
                   '"}'
               )
             );
